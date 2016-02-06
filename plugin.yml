@@ -1,0 +1,5 @@
+name: HotBlock
+main: jjmc\HotBlock\HotBlock
+version: 1.0.0
+api: 1.0.0
+author: jjmc
