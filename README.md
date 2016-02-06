@@ -15,4 +15,11 @@ Here's an example world:
 
 ![alt tag](http://i.imgur.com/TgobyZ1.jpg)
 
+You can test the plugin on our server:
+
+IP: play.plaype.ml
+Port: 19132
+
+Sorry that our server is on german, but I think it's understandable, simply hit the HotBlock statue to get to the HotBlock world.
+
 Please report issues on GitHub.
