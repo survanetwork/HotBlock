@@ -1,5 +1,5 @@
 name: HotBlock
-main: jjmc\HotBlock\HotBlock
+main: jjplaying\HotBlock\HotBlock
 version: 1.0.0
-api: 1.0.0
-author: jjmc
+api: 2.0.0
+depends: ["EconomyAPI"]

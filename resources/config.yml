@@ -4,13 +4,10 @@
 # |  _  | (_) | |_| |_) | | (_) | (__|   <
 # |_| |_|\___/ \__|____/|_|\___/ \___|_|\_\
 #
-# Funny minigame with PVP for PocketMine-MP
-# (C) 2016 by SURVA.ml (https://github.com/SURVAml)
-# Please post bugs on GitHub.
-#
+# (C) 2016 by jjplaying | https://github.com/jjplaying
 
-# In which world the game is
+# World of the game
 world: "HotBlock"
 
-# How many players must be online that the block is active (prevent that one player is alone getting coins)
+# How many players must be online that the block is active (prevent that one player is getting coins alone)
 players: 4
