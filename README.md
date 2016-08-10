@@ -3,7 +3,7 @@ A working and funny minigame for PocketMine
 
 ![](https://circleci.com/gh/jjplaying/HotBlock.png?style=shield)
 
-[Get the latest BuildTest artifacts here](https://buildtest.ml/jjplaying/HotBlock)
+[Get the latest HotBlock artifacts here](https://buildtest.ml/jjplaying/HotBlock)
 
 You need EconomyAPI to use this plugin!
 
