@@ -6,7 +6,7 @@
  * Time: 19:01
  */
 
-namespace jjplaying\HotBlock;
+namespace surva\HotBlock;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;

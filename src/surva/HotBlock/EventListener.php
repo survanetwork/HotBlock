@@ -6,7 +6,7 @@
  * Time: 19:02
  */
 
-namespace jjplaying\HotBlock;
+namespace surva\HotBlock;
 
 use pocketmine\block\Block;
 use pocketmine\entity\Effect;

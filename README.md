@@ -1,9 +1,9 @@
 # HotBlock
 A working and funny minigame for PocketMine-MP
 
-![](https://circleci.com/gh/pmmpplugins/HotBlock.png?style=shield)
+![](https://circleci.com/gh/survanetwork/HotBlock.png?style=shield)
 
-[Get the latest HotBlock artifacts here](https://buildtest.yellowlake.net/pmmpplugins/HotBlock)
+[Get the latest HotBlock artifacts here](https://buildtest.yellowlake.net/survanetwork/HotBlock)
 
 You need EconomyAPI to use this plugin!
 
@@ -25,4 +25,4 @@ Please report issues on GitHub.
 [![Creative Commons License](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 You are free to copy, redistribute, change or expand our work, but you must give credits share it under the same license.
-HotBlock by [pmmpplugins](https://github.com/pmmpplugins/HotBlock) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+HotBlock by [surva network](https://github.com/survanetwork/HotBlock) is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
