@@ -1,5 +1,5 @@
 # HotBlock
-A working and funny minigame for PocketMine-MP
+A funny PVP minigame
 
 ![](https://poggit.pmmp.io/ci.badge/survanetwork/HotBlock/HotBlock)
 
