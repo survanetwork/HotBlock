@@ -1,9 +1,9 @@
 # HotBlock
 A working and funny minigame for PocketMine-MP
 
-![](https://circleci.com/gh/survanetwork/HotBlock.png?style=shield)
+![](https://poggit.pmmp.io/ci.badge/survanetwork/HotBlock/HotBlock)
 
-[Get the latest HotBlock artifacts here](https://buildtest.yellowlake.net/survanetwork/HotBlock)
+[Get the latest HotBlock artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/HotBlock/HotBlock)
 
 You need EconomyAPI to use this plugin!
 
