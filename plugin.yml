@@ -2,4 +2,4 @@ name: HotBlock
 main: surva\HotBlock\HotBlock
 version: 1.0.0
 api: 2.0.0
-depends: ["EconomyAPI"]
+depend: ["EconomyAPI"]
