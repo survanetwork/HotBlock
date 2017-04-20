@@ -4,3 +4,4 @@ branches:
 projects:
   HotBlock:
     path: ""
+    icon: "icon.png"
