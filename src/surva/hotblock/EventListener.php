@@ -6,7 +6,7 @@
  * Time: 19:02
  */
 
-namespace surva\HotBlock;
+namespace surva\hotblock;
 
 use pocketmine\block\Block;
 use pocketmine\entity\Effect;
@@ -15,12 +15,16 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 
 class EventListener implements Listener {
+    /* @var HotBlock */
     private $hotBlock;
 
     public function __construct(HotBlock $hotBlock) {
         $this->hotBlock = $hotBlock;
     }
 
+    /**
+     * @param PlayerMoveEvent $event
+     */
     public function onPlayerMove(PlayerMoveEvent $event) {
         $player = $event->getPlayer();
         $world = $player->getLevel();
@@ -40,6 +44,7 @@ class EventListener implements Listener {
                     $effect = Effect::getEffect(Effect::POISON);
                     $effect->setVisible(true);
                     $effect->setDuration(50);
+
                     $player->addEffect($effect);
                     break;
                 case Block::QUARTZ_BLOCK:
@@ -47,14 +52,18 @@ class EventListener implements Listener {
                         $player->sendTip("§cThere must be " . $this->getHotBlock()->getConfig()->get("players") . "players online");
                     } else {
                         $player->sendTip("§eYou're standing on the §l§cHot§6Block§r§e! §bMove!");
-                        $this->getHotBlock()->getEconomy()->addMoney($player, 1, false, "HotBlock");
                         $player->sendPopup("§eYou have §a" . $this->getHotBlock()->getEconomy()->myMoney($player) . " §bCoins");
+
+                        $this->getHotBlock()->getEconomy()->addMoney($player, 1, false, "HotBlock");
                     }
                     break;
             }
         }
     }
 
+    /**
+     * @param EntityDamageEvent $event
+     */
     public function onEntityDamage(EntityDamageEvent $event) {
         $entity = $event->getEntity();
         $world = $entity->getLevel();

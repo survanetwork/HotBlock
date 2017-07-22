@@ -6,12 +6,13 @@
  * Time: 19:01
  */
 
-namespace surva\HotBlock;
+namespace surva\hotblock;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 
 class HotBlock extends PluginBase {
+    /* @var EconomyAPI */
     private $economy;
 
     public function onEnable() {
