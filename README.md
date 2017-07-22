@@ -15,7 +15,7 @@ The player standing on the HotBlock earns about 1 coin per secound.
 The real game is to hit the player from the HotBlock and get on it.
 If a player gets on a nether block, he gets poison effect for 2-3 secounds.
 
-Here's an example world:
+Here's an example world ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
 
 ![alt tag](http://i.imgur.com/TgobyZ1.jpg)
 
