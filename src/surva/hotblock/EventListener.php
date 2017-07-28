@@ -39,7 +39,7 @@ class EventListener implements Listener {
                     $player->sendTip("§eGo!");
                     break;
                 case Block::NETHERRACK:
-                    $player->sendTip("§cYou'll poisoned!");
+                    $player->sendTip("§cYou're poisoned!");
 
                     $effect = Effect::getEffect(Effect::POISON);
                     $effect->setVisible(true);
