@@ -10,4 +10,4 @@
 world: "HotBlock"
 
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
-players: 4
+players: 2
