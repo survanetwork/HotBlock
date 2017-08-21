@@ -36,7 +36,7 @@ class EventListener implements Listener {
                     $player->sendTip("§aYou're safe!");
                     break;
                 case Block::END_STONE:
-                    $player->sendTip("§eGo!");
+                    $player->sendTip("§eGo! Run from other players!");
                     break;
                 case Block::NETHERRACK:
                     $player->sendTip("§cYou're poisoned!");
