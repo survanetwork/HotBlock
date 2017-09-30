@@ -36,10 +36,10 @@ class EventListener implements Listener {
                     $player->sendTip("§aYou're safe!");
                     break;
                 case Block::END_STONE:
-                    $player->sendTip("§eGo!");
+                    $player->sendTip("§eGo! Run from other players!");
                     break;
                 case Block::NETHERRACK:
-                    $player->sendTip("§cYou'll poisoned!");
+                    $player->sendTip("§cYou're poisoned!");
 
                     $effect = Effect::getEffect(Effect::POISON);
                     $effect->setVisible(true);
@@ -49,7 +49,7 @@ class EventListener implements Listener {
                     break;
                 case Block::QUARTZ_BLOCK:
                     if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players")) {
-                        $player->sendTip("§cThere must be " . $this->getHotBlock()->getConfig()->get("players") . "players online");
+                        $player->sendTip("§cThere must be " . $this->getHotBlock()->getConfig()->get("players") . " players online");
                     } else {
                         $player->sendTip("§eYou're standing on the §l§cHot§6Block§r§e! §bMove!");
                         $player->sendPopup("§eYou have §a" . $this->getHotBlock()->getEconomy()->myMoney($player) . " §bCoins");
