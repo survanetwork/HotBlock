@@ -19,7 +19,7 @@ Here's an example world ([you can download it here](https://github.com/survanetw
 
 ![alt tag](http://i.imgur.com/TgobyZ1.jpg)
 
-Please report issues on GitHub.
+Please report issues on [GitHub](https://github.com/survanetwork/HotBlock/issues).
 
 ## License & Credits
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
