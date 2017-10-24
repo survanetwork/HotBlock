@@ -1,0 +1,21 @@
+#  _   _       _   ____  _            _
+# | | | | ___ | |_| __ )| | ___   ___| | __
+# | |_| |/ _ \| __|  _ \| |/ _ \ / __| |/ /
+# |  _  | (_) | |_| |_) | | (_) | (__|   <
+# |_| |_|\___/ \__|____/|_|\___/ \___|_|\_\
+#
+# (C) 2017 by surva network | https://github.com/survanetwork
+
+# English language
+
+# Status messages based on the ground
+ground:
+  safe: "§aYou're safe!"
+  run: "§eGo! Run from other players!"
+  poisoned: "§cYou're poisoned!"
+
+# Messages on the HotBlock
+block:
+  lessplayers: "§6There must be §f{count} §6players online to play the game"
+  move: "§eYou're standing on the §l§cHot§6Block§r§e! §bMove!"
+  coins: "§bYou have §f{count} §bCoins"

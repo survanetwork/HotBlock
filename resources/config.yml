@@ -6,8 +6,12 @@
 #
 # (C) 2017 by surva network | https://github.com/survanetwork
 
-# World of the game
-world: "HotBlock"
+# Language of the plugin messages
+# Possible options are: en (English), de (German)
+language: "en"
+
+# Name of the world where the game is in
+world: "world"
 
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
-players: 2
+players: 3

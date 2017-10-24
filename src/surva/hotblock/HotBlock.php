@@ -10,8 +10,12 @@ namespace surva\hotblock;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 
 class HotBlock extends PluginBase {
+    /* @var Config */
+    private $messages;
+
     /* @var EconomyAPI */
     private $economy;
 
@@ -19,7 +23,28 @@ class HotBlock extends PluginBase {
         $this->saveDefaultConfig();
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
+        $this->messages = new Config($this->getFile() . "resources/languages/" . $this->getConfig()->get("language") . ".yml");
+
         $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+    }
+
+    /**
+     * Get a translated message
+     *
+     * @param string $key
+     * @param array $replaces
+     * @return string
+     */
+    public function getMessage(string $key, array $replaces = array()): string {
+        if($rawMessage = $this->getMessages()->getNested($key)) {
+            if(is_array($replaces)) {
+                foreach($replaces as $replace => $value) {
+                    $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
+                }
+            }
+            return $rawMessage;
+        }
+        return $key;
     }
 
     /**
@@ -27,5 +52,12 @@ class HotBlock extends PluginBase {
      */
     public function getEconomy(): EconomyAPI {
         return $this->economy;
+    }
+
+    /**
+     * @return Config
+     */
+    public function getMessages(): Config {
+        return $this->messages;
     }
 }

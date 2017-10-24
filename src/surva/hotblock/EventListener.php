@@ -33,13 +33,13 @@ class EventListener implements Listener {
         if($world->getName() == $this->getHotBlock()->getConfig()->get("world")) {
             switch($block->getId()) {
                 case Block::PLANKS:
-                    $player->sendTip("§aYou're safe!");
+                    $player->sendTip($this->getHotBlock()->getMessage("ground.safe"));
                     break;
                 case Block::END_STONE:
-                    $player->sendTip("§eGo! Run from other players!");
+                    $player->sendTip($this->getHotBlock()->getMessage("ground.run"));
                     break;
                 case Block::NETHERRACK:
-                    $player->sendTip("§cYou're poisoned!");
+                    $player->sendTip($this->getHotBlock()->getMessage("ground.poisoned"));
 
                     $effect = Effect::getEffect(Effect::POISON);
                     $effect->setVisible(true);
@@ -49,10 +49,10 @@ class EventListener implements Listener {
                     break;
                 case Block::QUARTZ_BLOCK:
                     if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players")) {
-                        $player->sendTip("§cThere must be " . $this->getHotBlock()->getConfig()->get("players") . " players online");
+                        $player->sendTip($this->getHotBlock()->getMessage("block.lessplayers", array("count" => $this->getHotBlock()->getConfig()->get("players"))));
                     } else {
-                        $player->sendTip("§eYou're standing on the §l§cHot§6Block§r§e! §bMove!");
-                        $player->sendPopup("§eYou have §a" . $this->getHotBlock()->getEconomy()->myMoney($player) . " §bCoins");
+                        $player->sendTip($this->getHotBlock()->getMessage("block.move"));
+                        $player->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($player))));
 
                         $this->getHotBlock()->getEconomy()->addMoney($player, 1, false, "HotBlock");
                     }
