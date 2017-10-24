@@ -5,8 +5,10 @@ A funny PVP minigame
 
 [Get the latest HotBlock artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/HotBlock/HotBlock)
 
+## Dependencies
 You need EconomyAPI to use this plugin!
 
+## Game description
 All players are outside on wood planks where they are safe (no PVP).
 Everywhere else, PVP is enabled.
 In the mid, there is one quart block, the HotBlock.
@@ -15,9 +17,13 @@ The player standing on the HotBlock earns about 1 coin per secound.
 The real game is to hit the player from the HotBlock and get on it.
 If a player gets on a nether block, he gets poison effect for 2-3 secounds.
 
+## Example world
+
 Here's an example world ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
 
 ![alt tag](http://i.imgur.com/TgobyZ1.jpg)
+
+## Issues
 
 Please report issues on [GitHub](https://github.com/survanetwork/HotBlock/issues).
 
