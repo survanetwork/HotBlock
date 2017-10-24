@@ -41,7 +41,7 @@ class EventListener implements Listener {
                 case Block::NETHERRACK:
                     $player->sendTip($this->getHotBlock()->getMessage("ground.poisoned"));
 
-                    $effect = Effect::getEffect(Effect::POISON);
+                    $effect = Effect::getEffect(Effect::SLOWNESS);
                     $effect->setVisible(true);
                     $effect->setDuration(50);
 
