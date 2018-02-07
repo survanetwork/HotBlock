@@ -30,7 +30,7 @@ class EventListener implements Listener {
         $world = $player->getLevel();
         $block = $world->getBlock($player->floor()->subtract(0, 1));
 
-        if($world->getName() === $this->getHotBlock()->getConfig()->get("world")) {
+        if($world->getName() === $this->getHotBlock()->getConfig()->get("world", "world")) {
             switch($block->getId()) {
                 case Block::PLANKS:
                     $player->sendTip($this->getHotBlock()->getMessage("ground.safe"));
@@ -48,8 +48,8 @@ class EventListener implements Listener {
                     $player->addEffect($effect);
                     break;
                 case Block::QUARTZ_BLOCK:
-                    if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players")) {
-                        $player->sendTip($this->getHotBlock()->getMessage("block.lessplayers", array("count" => $this->getHotBlock()->getConfig()->get("players"))));
+                    if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players", 2)) {
+                        $player->sendTip($this->getHotBlock()->getMessage("block.lessplayers", array("count" => $this->getHotBlock()->getConfig()->get("players", 3))));
                     } else {
                         $player->sendTip($this->getHotBlock()->getMessage("block.move"));
                         $player->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($player))));
@@ -69,7 +69,7 @@ class EventListener implements Listener {
         $world = $entity->getLevel();
         $block = $world->getBlock($entity->floor()->subtract(0, 1));
 
-        if($world->getName() === $this->getHotBlock()->getConfig()->get("world")) {
+        if($world->getName() === $this->getHotBlock()->getConfig()->get("world", "world")) {
             if($block->getId() === Block::PLANKS) {
                 $event->setCancelled();
             }
