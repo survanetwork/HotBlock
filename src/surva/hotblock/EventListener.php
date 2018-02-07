@@ -25,12 +25,12 @@ class EventListener implements Listener {
     /**
      * @param PlayerMoveEvent $event
      */
-    public function onPlayerMove(PlayerMoveEvent $event) {
+    public function onPlayerMove(PlayerMoveEvent $event): void {
         $player = $event->getPlayer();
         $world = $player->getLevel();
         $block = $world->getBlock($player->floor()->subtract(0, 1));
 
-        if($world->getName() == $this->getHotBlock()->getConfig()->get("world")) {
+        if($world->getName() === $this->getHotBlock()->getConfig()->get("world")) {
             switch($block->getId()) {
                 case Block::PLANKS:
                     $player->sendTip($this->getHotBlock()->getMessage("ground.safe"));
@@ -64,16 +64,14 @@ class EventListener implements Listener {
     /**
      * @param EntityDamageEvent $event
      */
-    public function onEntityDamage(EntityDamageEvent $event) {
+    public function onEntityDamage(EntityDamageEvent $event): void {
         $entity = $event->getEntity();
         $world = $entity->getLevel();
         $block = $world->getBlock($entity->floor()->subtract(0, 1));
 
-        if($world->getName() == $this->getHotBlock()->getConfig()->get("world")) {
-            switch($block->getId()) {
-                case Block::PLANKS:
-                    $event->setCancelled(true);
-                    break;
+        if($world->getName() === $this->getHotBlock()->getConfig()->get("world")) {
+            if($block->getId() === Block::PLANKS) {
+                $event->setCancelled();
             }
         }
     }

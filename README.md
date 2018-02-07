@@ -1,27 +1,43 @@
 # HotBlock
-A funny PVP minigame
+A funny PvP minigame
 
 ![](https://poggit.pmmp.io/ci.badge/survanetwork/HotBlock/HotBlock)
 
 [Get the latest HotBlock artifacts (PHAR file) here](https://poggit.pmmp.io/ci/survanetwork/HotBlock/HotBlock)
 
-You need EconomyAPI to use this plugin!
+## Description
+HotBlock is a funny PvP minigame. The goal is to stand as long as possible on the 'hot block' in the middle of the arena in order to earn money (via EconomyAPI). Because every player wants to get there, there is an exiting PvP-match. The dangerous poisoned blocks are making the game even more exiting.
 
-Please report issues on [GitHub](https://github.com/survanetwork/HotBlock/issues).
+## Features
+- Open game arena
+- Exiting PvP-matches for the players
+- Customizable messages and abuse-protection
 
-## Game description
-All players are outside on wood planks where they are safe (no PVP).
-Everywhere else, PVP is enabled.
-In the mid, there is one quart block, the HotBlock.
-The players can walk to it thorugh the endstones.
-The player standing on the HotBlock earns about 1 coin per secound.
-The real game is to hit the player from the HotBlock and get on it.
-If a player gets on a nether block, he gets poison effect for 2-3 secounds.
+## Usage
+There are different types of blocks in the game arena:
 
-## Example world
-Here's an example world ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
+| Block | PvP | Effect |
+| --- | --- | --- |
+| `WOOD` | ❌ | All players are safe, usually they spawn there |
+| `ENDSTONE` | ✅ | Normal playing field, nothing special here |
+| `NETHERRACK` | ✅ | Players get poisoned for 2-3 seconds when walking over those blocks
+| `QUARTBLOCK` | ✅ | The HotBlock, players are earning some coins per second when moving on this block |
 
-![alt tag](http://i.imgur.com/TgobyZ1.jpg)
+### Example game area
+This is how a HotBlock-world can look like ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
+
+![](http://i.imgur.com/TgobyZ1.jpg)
+
+## Contribution
+
+Feel free to contribute if you have ideas or found an issue.
+
+You can:
+- [open an issue](https://github.com/survanetwork/HotBlock/issues) (problems, bugs or feature requests)
+- [create a pull request](https://github.com/survanetwork/HotBlock/pulls) (code contributions like fixed bugs or added features)
+- [help translating the plugin](https://github.com/survanetwork/HotBlock/tree/master/resources/languages) (create a new language file or correct an existing one)
+
+Many thanks for their support to all contributors!
 
 ## License & Credits
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
