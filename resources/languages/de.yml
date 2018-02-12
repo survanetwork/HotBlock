@@ -16,6 +16,6 @@ ground:
 
 # Messages on the HotBlock
 block:
-  lessplayers: "§6Es müssen §f{count} §6Spieler online sein, um das Spiel zu spielen"
+  lessplayers: "§6Es müssen mindestens §f{count} §6Spieler online sein, um das Spiel zu spielen."
   move: "§eDu stehst auf dem §l§cHot§6Block§r§e! §bBewege dich!"
-  coins: "§bDu hast §f{count} §bCoins"
+  coins: "§bDu hast §f{count} §bCoins."

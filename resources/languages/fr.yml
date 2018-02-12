@@ -6,16 +6,16 @@
 #
 # (C) 2018 by surva network | https://github.com/survanetwork
 
-# English language
+# French language
 
 # Status messages based on the ground
 ground:
-  safe: "§aYou're safe!"
-  run: "§eGo! Run from other players!"
-  poisoned: "§cYou're poisoned!"
+  safe: "§aTu es en sécurité ici!"
+  run: "§eAllons-y! Fuis des autres joueurs!"
+  poisoned: "§cTu as été empoisonné!"
 
 # Messages on the HotBlock
 block:
-  lessplayers: "§6There must be at least §f{count} §6players online to play the game."
-  move: "§eYou're standing on the §l§cHot§6Block§r§e! §bMove!"
-  coins: "§bYou have §f{count} §bCoins."
+  lessplayers: "§6Il doit y avoir au moins §f{count} §6joueurs en ligne pour jouer le jeu."
+  move: "§eTu es sur l’§l§cHot§6Block§r§e! §bBouge-toi!"
+  coins: "§bTu as §f{count} §bCoins"
