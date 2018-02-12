@@ -50,10 +50,26 @@ class EventListener implements Listener {
                     if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players", 2)) {
                         $player->sendTip($this->getHotBlock()->getMessage("block.lessplayers", array("count" => $this->getHotBlock()->getConfig()->get("players", 3))));
                     } else {
-                        $player->sendTip($this->getHotBlock()->getMessage("block.move"));
-                        $player->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($player))));
+                        $shouldGetCoins = true;
 
-                        $this->getHotBlock()->getEconomy()->addMoney($player, 1, false, "HotBlock");
+                        if($this->getHotBlock()->getConfig()->get("onlyplayer", false) === true) {
+                            foreach($world->getPlayers() as $otherPlayer) {
+                                if($otherPlayer->getName() !== $player->getName()) {
+                                    $block = $world->getBlock($otherPlayer->floor()->subtract(0, 1));
+
+                                    if($block === Block::QUARTZ_BLOCK) {
+                                        $shouldGetCoins = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        if($shouldGetCoins) {
+                            $player->sendTip($this->getHotBlock()->getMessage("block.move"));
+                            $player->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($player))));
+
+                            $this->getHotBlock()->getEconomy()->addMoney($player, 1, false, "HotBlock");
+                        }
                     }
                     break;
             }

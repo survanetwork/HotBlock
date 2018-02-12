@@ -16,6 +16,9 @@ world: "world"
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
 players: 3
 
+# Only give coins when a player is alone on the HotBlock
+onlyplayer: false
+
 # Which effect a player gets when he touches a nether-block
 #
 # Possible values are:
