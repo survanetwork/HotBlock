@@ -15,3 +15,37 @@ world: "world"
 
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
 players: 3
+
+# Which effect a player gets when he touches a nether-block
+#
+# Possible values are:
+#  SPEED
+#  SLOWNESS
+#  HASTE
+#  FATIGUE
+#  STRENGTH
+#  INSTANT_HEALTH
+#  INSTANT_DAMAGE
+#  JUMP_BOOST
+#  NAUSEA
+#  REGENERATION
+#  RESISTANCE
+#  FIRE_RESISTANCE
+#  WATER_BREATHING
+#  INVISIBILITY
+#  BLINDNESS
+#  NIGHT_VISION
+#  HUNGER
+#  WEAKNESS
+#  POISON
+#  WITHER
+#  HEALTH_BOOST
+#  ABSORPTION
+#  SATURATION
+#  LEVITATION
+#  FATAL_POISON
+#
+effecttype: "POISON"
+
+# How long the effect should take (in seconds)
+effectduration: 3
