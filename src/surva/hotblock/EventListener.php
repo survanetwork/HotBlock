@@ -10,6 +10,7 @@ namespace surva\hotblock;
 
 use pocketmine\block\Block;
 use pocketmine\entity\Effect;
+use pocketmine\entity\EffectInstance;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
@@ -42,9 +43,9 @@ class EventListener implements Listener {
                     $player->sendTip($this->getHotBlock()->getMessage("ground.poisoned"));
 
                     $effect = Effect::getEffectByName($this->getHotBlock()->getConfig()->get("effecttype", "POISON"));
-                    $effect->setDuration($this->getHotBlock()->getConfig()->get("effectduration", 3) * 20);
+                    $duration = $this->getHotBlock()->getConfig()->get("effectduration", 3) * 20;
 
-                    $player->addEffect($effect);
+                    $player->addEffect(new EffectInstance($effect, $duration));
                     break;
                 case Block::QUARTZ_BLOCK:
                     if(count($world->getPlayers()) < $this->getHotBlock()->getConfig()->get("players", 2)) {
