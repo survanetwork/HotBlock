@@ -23,7 +23,9 @@ class PlayerCoinGiveTask extends PluginTask {
     }
 
     public function onRun(int $currentTick) {
-        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName($this->getHotBlock()->getConfig()->get("world", "world")))) {
+        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName(
+            $this->getHotBlock()->getConfig()->get("world", "world")
+        ))) {
             return;
         }
 
@@ -34,7 +36,12 @@ class PlayerCoinGiveTask extends PluginTask {
 
             if($blockUnderPlayer->getId() === Block::QUARTZ_BLOCK) {
                 if(count($gameLevel->getPlayers()) < $this->getHotBlock()->getConfig()->get("players", 2)) {
-                    $playerInLevel->sendTip($this->getHotBlock()->getMessage("block.lessplayers", array("count" => $this->getHotBlock()->getConfig()->get("players", 3))));
+                    $playerInLevel->sendTip(
+                        $this->getHotBlock()->getMessage(
+                            "block.lessplayers",
+                            array("count" => $this->getHotBlock()->getConfig()->get("players", 3))
+                        )
+                    );
                 } else {
                     if($this->getHotBlock()->getConfig()->get("onlyplayer", false) === true) {
                         $playersOnBlock++;
@@ -44,7 +51,12 @@ class PlayerCoinGiveTask extends PluginTask {
                         }
                     } else {
                         $playerInLevel->sendTip($this->getHotBlock()->getMessage("block.move"));
-                        $playerInLevel->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($playerInLevel))));
+                        $playerInLevel->sendTip(
+                            $this->getHotBlock()->getMessage(
+                                "block.coins",
+                                array("count" => $this->getHotBlock()->getEconomy()->myMoney($playerInLevel))
+                            )
+                        );
 
                         $this->getHotBlock()->getEconomy()->addMoney($playerInLevel, 1, false, "HotBlock");
                     }
@@ -55,7 +67,12 @@ class PlayerCoinGiveTask extends PluginTask {
         if($this->getHotBlock()->getConfig()->get("onlyplayer", false) === true) {
             if($playersOnBlock === 1) {
                 $onlyPlayer->sendTip($this->getHotBlock()->getMessage("block.move"));
-                $onlyPlayer->sendTip($this->getHotBlock()->getMessage("block.coins", array("count" => $this->getHotBlock()->getEconomy()->myMoney($onlyPlayer))));
+                $onlyPlayer->sendTip(
+                    $this->getHotBlock()->getMessage(
+                        "block.coins",
+                        array("count" => $this->getHotBlock()->getEconomy()->myMoney($onlyPlayer))
+                    )
+                );
 
                 $this->getHotBlock()->getEconomy()->addMoney($onlyPlayer, 1, false, "HotBlock");
             }

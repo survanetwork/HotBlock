@@ -25,7 +25,9 @@ class PlayerBlockCheckTask extends PluginTask {
     }
 
     public function onRun(int $currentTick) {
-        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName($this->getHotBlock()->getConfig()->get("world", "world")))) {
+        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName(
+            $this->getHotBlock()->getConfig()->get("world", "world")
+        ))) {
             return;
         }
 
