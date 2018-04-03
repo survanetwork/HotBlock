@@ -16,6 +16,12 @@ world: "world"
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
 players: 3
 
+# The interval in which should be checked on which block the players are standing (and send messages, give effects, etc.) (in seconds)
+checkspeed: 0.25
+
+# The interval in which coins should be given to the player(s) standing on the HotBlock (in seconds)
+coinspeed: 0.25
+
 # Only give coins when a player is alone on the HotBlock
 onlyplayer: false
 

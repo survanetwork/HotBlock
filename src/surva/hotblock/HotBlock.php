@@ -11,6 +11,8 @@ namespace surva\hotblock;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use surva\hotblock\tasks\PlayerBlockCheckTask;
+use surva\hotblock\tasks\PlayerCoinGiveTask;
 
 class HotBlock extends PluginBase {
     /* @var Config */
@@ -26,6 +28,9 @@ class HotBlock extends PluginBase {
         $this->messages = new Config($this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml");
 
         $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PlayerBlockCheckTask($this), $this->getConfig()->get("checkspeed", 0.25) * 20);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new PlayerCoinGiveTask($this), $this->getConfig()->get("coinspeed", 0.25) * 20);
     }
 
     /**
