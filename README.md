@@ -1,3 +1,9 @@
+<p align="center">
+    <img src="icon.png" width="96px" height="96px">
+</p>
+
+<br>
+
 <h1 align="center">HotBlock</h1>
 <p align="center">A funny PvP minigame</p>
 
