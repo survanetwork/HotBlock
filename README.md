@@ -10,20 +10,20 @@
 <br>
 
 <p align="center">
-    <a href="https://poggit.pmmp.io/p/Worlds">
+    <a href="https://poggit.pmmp.io/p/HotBlock">
         <img src="https://poggit.pmmp.io/shield.state/HotBlock" alt="Plugin version">
     </a>
     <a href="https://github.com/pmmp/PocketMine-MP">
         <img src="https://poggit.pmmp.io/shield.api/HotBlock" alt="API version">
     </a>
-    <a href="https://poggit.pmmp.io/p/Worlds">
+    <a href="https://poggit.pmmp.io/p/HotBlock">
         <img src="https://poggit.pmmp.io/shield.dl/HotBlock" alt="Downloads on Poggit">
     </a>
-    <a href="https://github.com/jarne/QueryPage/blob/master/LICENSE">
+    <a href="https://github.com/survanetwork/HotBlock/blob/master/LICENSE">
         <img src="https://img.shields.io/badge/license-CC--BY--NC--SA--4.0-orange.svg" alt="License">
     </a>
-    <a href="https://gitter.im/jarne/QueryPage">
-        <img src="https://img.shields.io/gitter/room/jarne/QueryPage.svg" alt="Gitter">
+    <a href="https://gitter.im/survanetwork/HotBlock">
+        <img src="https://img.shields.io/gitter/room/survanetwork/HotBlock.svg" alt="Gitter">
     </a>
 </p>
 
