@@ -32,7 +32,7 @@
 [• Description](#-description)  
 [• Features](#-features)  
 [• Usage](#-usage)  
-[• Example game area](#-example-game-arena)  
+[• Example Game Arena](#-example-game-arena)  
 [• Contribution](#-contribution)  
 [• License](#%EF%B8%8F-license)
 
