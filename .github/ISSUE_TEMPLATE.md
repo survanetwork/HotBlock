@@ -1,7 +1,7 @@
 <!--
 
     Please ensure
-        - you have read the Contribution Guidelines (https://github.com/survanetwork/HotBLock/blob/master/CONTRIBUTION.md)
+        - you have read the Contribution Guidelines (https://github.com/survanetwork/HotBlock/blob/master/CONTRIBUTION.md)
         - your issue is not a question, please ask questions on Gitter (https://gitter.im/survanetwork/HotBlock)
     before creating an issue at this repo.
 
