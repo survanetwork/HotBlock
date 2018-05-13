@@ -40,9 +40,9 @@
 HotBlock is a funny PvP minigame. The goal is to stand as long as possible on the 'Hot Block' in the middle of the arena in order to earn money (via EconomyAPI). Because every player wants to get there, there is an exiting PvP-match. The dangerous poisoned blocks are making the game even more exiting.
 
 ## 🎁 Features
-- Open Game Arena
-- Exiting PvP-matches for the players
-- Customizable Messages and Abuse-Protection
+- **OPEN ARENA** Open Game Arena where players can join at any time
+- **EXITING MATCHES** Exiting PvP-matches for the players
+- **ADVANCED FEATURES** Customizable Messages and Abuse-Protection
 
 ## 🖱 Usage
 There are different types of blocks in the game arena:
