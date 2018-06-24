@@ -5,7 +5,7 @@
 <br>
 
 <h1 align="center">HotBlock</h1>
-<p align="center">A funny PvP minigame</p>
+<p align="center">A funny PvP Minigame</p>
 
 <br>
 
