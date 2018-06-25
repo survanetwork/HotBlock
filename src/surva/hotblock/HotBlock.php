@@ -31,11 +31,11 @@ class HotBlock extends PluginBase {
 
         $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
 
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(
+        $this->getScheduler()->scheduleRepeatingTask(
             new PlayerBlockCheckTask($this),
             $this->getConfig()->get("checkspeed", 0.25) * 20
         );
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(
+        $this->getScheduler()->scheduleRepeatingTask(
             new PlayerCoinGiveTask($this),
             $this->getConfig()->get("coinspeed", 0.25) * 20
         );

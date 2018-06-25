@@ -9,17 +9,15 @@
 namespace surva\hotblock\tasks;
 
 use pocketmine\block\Block;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
 
-class PlayerCoinGiveTask extends PluginTask {
+class PlayerCoinGiveTask extends Task {
     /* @var HotBlock */
     private $hotBlock;
 
     public function __construct(HotBlock $hotBlock) {
         $this->hotBlock = $hotBlock;
-
-        parent::__construct($hotBlock);
     }
 
     public function onRun(int $currentTick) {
