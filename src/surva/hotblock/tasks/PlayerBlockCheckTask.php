@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jarne
- * Date: 01.04.18
- * Time: 21:18
+ * HotBlock | player block checking task
  */
 
 namespace surva\hotblock\tasks;
@@ -18,14 +15,24 @@ class PlayerBlockCheckTask extends Task {
     /* @var HotBlock */
     private $hotBlock;
 
+    /**
+     * PlayerBlockCheckTask constructor
+     *
+     * @param HotBlock $hotBlock
+     */
     public function __construct(HotBlock $hotBlock) {
         $this->hotBlock = $hotBlock;
     }
 
-    public function onRun(int $currentTick) {
-        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName(
-            $this->getHotBlock()->getConfig()->get("world", "world")
-        ))) {
+    /**
+     * Task run
+     *
+     * @param int $currentTick
+     */
+    public function onRun(int $currentTick): void {
+        $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
+
+        if(!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
             return;
         }
 
@@ -34,27 +41,20 @@ class PlayerBlockCheckTask extends Task {
 
             switch($blockUnderPlayer->getId()) {
                 case Block::PLANKS:
-                    $playerInLevel->sendTip($this->getHotBlock()->getMessage("ground.safe"));
+                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.safe"));
                     break;
                 case Block::END_STONE:
-                    $playerInLevel->sendTip($this->getHotBlock()->getMessage("ground.run"));
+                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.run"));
                     break;
                 case Block::NETHERRACK:
-                    $playerInLevel->sendTip($this->getHotBlock()->getMessage("ground.poisoned"));
+                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
 
-                    $effect = Effect::getEffectByName($this->getHotBlock()->getConfig()->get("effecttype", "POISON"));
-                    $duration = $this->getHotBlock()->getConfig()->get("effectduration", 3) * 20;
+                    $effect = Effect::getEffectByName($this->hotBlock->getConfig()->get("effecttype", "POISON"));
+                    $duration = $this->hotBlock->getConfig()->get("effectduration", 3) * 20;
 
                     $playerInLevel->addEffect(new EffectInstance($effect, $duration));
                     break;
             }
         }
-    }
-
-    /**
-     * @return HotBlock
-     */
-    public function getHotBlock(): HotBlock {
-        return $this->hotBlock;
     }
 }

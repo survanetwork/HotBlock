@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Jarne
- * Date: 10.08.16
- * Time: 19:02
+ * HotBlock | event listener
  */
 
 namespace surva\hotblock;
@@ -16,29 +13,31 @@ class EventListener implements Listener {
     /* @var HotBlock */
     private $hotBlock;
 
+    /**
+     * EventListener constructor
+     *
+     * @param HotBlock $hotBlock
+     */
     public function __construct(HotBlock $hotBlock) {
         $this->hotBlock = $hotBlock;
     }
 
     /**
+     * Cancel damage if the player is on wood planks
+     *
      * @param EntityDamageEvent $event
      */
     public function onEntityDamage(EntityDamageEvent $event): void {
         $entity = $event->getEntity();
         $world = $entity->getLevel();
-        $block = $world->getBlock($entity->floor()->subtract(0, 1));
+        $blockUnder = $world->getBlock($entity->floor()->subtract(0, 1));
 
-        if($world->getName() === $this->getHotBlock()->getConfig()->get("world", "world")) {
-            if($block->getId() === Block::PLANKS) {
+        $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
+
+        if($world->getName() === $hbWorldName) {
+            if($blockUnder->getId() === Block::PLANKS) {
                 $event->setCancelled();
             }
         }
-    }
-
-    /**
-     * @return HotBlock
-     */
-    public function getHotBlock(): HotBlock {
-        return $this->hotBlock;
     }
 }

@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Jarne
- * Date: 10.08.16
- * Time: 19:01
+ * HotBlock | plugin main class
  */
 
 namespace surva\hotblock;
@@ -21,15 +18,19 @@ class HotBlock extends PluginBase {
     /* @var EconomyAPI */
     private $economy;
 
-    public function onEnable() {
+    /**
+     * Plugin has been enabled, initial setup
+     */
+    public function onEnable(): void {
         $this->saveDefaultConfig();
-        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
         $this->messages = new Config(
             $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
         $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(
             new PlayerBlockCheckTask($this),
@@ -49,7 +50,7 @@ class HotBlock extends PluginBase {
      * @return string
      */
     public function getMessage(string $key, array $replaces = array()): string {
-        if($rawMessage = $this->getMessages()->getNested($key)) {
+        if($rawMessage = $this->messages->getNested($key)) {
             if(is_array($replaces)) {
                 foreach($replaces as $replace => $value) {
                     $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
@@ -67,12 +68,5 @@ class HotBlock extends PluginBase {
      */
     public function getEconomy(): EconomyAPI {
         return $this->economy;
-    }
-
-    /**
-     * @return Config
-     */
-    public function getMessages(): Config {
-        return $this->messages;
     }
 }

@@ -1,14 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: jarne
- * Date: 01.04.18
- * Time: 21:26
+ * HotBlock | player coin giving task
  */
 
 namespace surva\hotblock\tasks;
 
 use pocketmine\block\Block;
+use pocketmine\level\Level;
+use pocketmine\Player;
 use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
 
@@ -16,71 +15,93 @@ class PlayerCoinGiveTask extends Task {
     /* @var HotBlock */
     private $hotBlock;
 
+    /**
+     * PlayerCoinGiveTask constructor
+     *
+     * @param HotBlock $hotBlock
+     */
     public function __construct(HotBlock $hotBlock) {
         $this->hotBlock = $hotBlock;
     }
 
-    public function onRun(int $currentTick) {
-        if(!($gameLevel = $this->getHotBlock()->getServer()->getLevelByName(
-            $this->getHotBlock()->getConfig()->get("world", "world")
-        ))) {
+    /**
+     * Task run
+     *
+     * @param int $currentTick
+     */
+    public function onRun(int $currentTick): void {
+        $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
+
+        if(!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
             return;
         }
+
+        $onlyOnePlayer = $this->hotBlock->getConfig()->get("onlyplayer", false);
 
         $playersOnBlock = 0;
 
         foreach($gameLevel->getPlayers() as $playerInLevel) {
-            $blockUnderPlayer = $gameLevel->getBlock($playerInLevel->subtract(0, 0.5));
-
-            if($blockUnderPlayer->getId() === Block::QUARTZ_BLOCK) {
-                if(count($gameLevel->getPlayers()) < $this->getHotBlock()->getConfig()->get("players", 2)) {
-                    $playerInLevel->sendTip(
-                        $this->getHotBlock()->getMessage(
-                            "block.lessplayers",
-                            array("count" => $this->getHotBlock()->getConfig()->get("players", 3))
-                        )
-                    );
-                } else {
-                    if($this->getHotBlock()->getConfig()->get("onlyplayer", false) === true) {
-                        $playersOnBlock++;
-
-                        if($playersOnBlock === 1) {
-                            $onlyPlayer = $playerInLevel;
-                        }
-                    } else {
-                        $playerInLevel->sendTip($this->getHotBlock()->getMessage("block.move"));
-                        $playerInLevel->sendTip(
-                            $this->getHotBlock()->getMessage(
-                                "block.coins",
-                                array("count" => $this->getHotBlock()->getEconomy()->myMoney($playerInLevel))
-                            )
-                        );
-
-                        $this->getHotBlock()->getEconomy()->addMoney($playerInLevel, 1, false, "HotBlock");
-                    }
-                }
+            if($onlyOnePlayer === true) {
+                $playersOnBlock++;
+            } else {
+                $this->handlePlayer($gameLevel, $playerInLevel);
             }
         }
 
-        if($this->getHotBlock()->getConfig()->get("onlyplayer", false) === true) {
-            if($playersOnBlock === 1) {
-                $onlyPlayer->sendTip($this->getHotBlock()->getMessage("block.move"));
-                $onlyPlayer->sendTip(
-                    $this->getHotBlock()->getMessage(
-                        "block.coins",
-                        array("count" => $this->getHotBlock()->getEconomy()->myMoney($onlyPlayer))
-                    )
-                );
-
-                $this->getHotBlock()->getEconomy()->addMoney($onlyPlayer, 1, false, "HotBlock");
-            }
+        if($onlyOnePlayer !== true) {
+            return;
         }
+
+        if($playersOnBlock !== 1) {
+            return;
+        }
+
+        $this->handlePlayer($gameLevel, $gameLevel->getPlayers()[0]);
     }
 
     /**
-     * @return HotBlock
+     * Handle coin giving of a player
+     *
+     * @param Level $gameLvl
+     * @param Player $pl
      */
-    public function getHotBlock(): HotBlock {
-        return $this->hotBlock;
+    private function handlePlayer(Level $gameLvl, Player $pl): void {
+        $blockUnder = $gameLvl->getBlock($pl->subtract(0, 0.5));
+
+        if($blockUnder->getId() !== Block::QUARTZ_BLOCK) {
+            return;
+        }
+
+        $minPlayers = $this->hotBlock->getConfig()->get("players", 3);
+
+        if(count($gameLvl->getPlayers()) < $minPlayers) {
+            $pl->sendTip(
+                $this->hotBlock->getMessage(
+                    "block.lessplayers",
+                    array("count" => $minPlayers)
+                )
+            );
+
+            return;
+        }
+
+        $this->payCoins($pl);
+    }
+
+    /**
+     * Pay the coins to a player
+     *
+     * @param Player $pl
+     */
+    private function payCoins(Player $pl): void {
+        $pl->sendTip($this->hotBlock->getMessage("block.move"));
+        $pl->sendTip(
+            $this->hotBlock->getMessage(
+                "block.coins",
+                array("count" => $this->hotBlock->getEconomy()->myMoney($pl))
+            )
+        );
+
+        $this->hotBlock->getEconomy()->addMoney($pl, 1, false, "HotBlock");
     }
 }
