@@ -38,25 +38,39 @@ class PlayerCoinGiveTask extends Task {
 
         $onlyOnePlayer = $this->hotBlock->getConfig()->get("onlyplayer", false);
 
-        $playersOnBlock = 0;
+        if($onlyOnePlayer === true) {
+            $playersOnBlock = 0;
 
-        foreach($gameLevel->getPlayers() as $playerInLevel) {
-            if($onlyOnePlayer === true) {
-                $playersOnBlock++;
-            } else {
-                $this->handlePlayer($gameLevel, $playerInLevel);
+            foreach($gameLevel->getPlayers() as $playerInLevel) {
+                if($this->isPlayerOnHotBlock($gameLevel, $playerInLevel)) {
+                    $playersOnBlock++;
+                }
+            }
+
+            if($playersOnBlock !== 1) {
+                return;
             }
         }
 
-        if($onlyOnePlayer !== true) {
-            return;
+        foreach($gameLevel->getPlayers() as $playerInLevel) {
+            if($this->isPlayerOnHotBlock($gameLevel, $playerInLevel)) {
+                $this->handlePlayer($gameLevel, $playerInLevel);
+            }
         }
+    }
 
-        if($playersOnBlock !== 1) {
-            return;
-        }
+    /**
+     * Check if a player is standing on the HotBlock
+     *
+     * @param \pocketmine\level\Level $gameLvl
+     * @param \pocketmine\Player $pl
+     *
+     * @return bool
+     */
+    private function isPlayerOnHotBlock(Level $gameLvl, Player $pl): bool {
+        $blockUnder = $gameLvl->getBlock($pl->subtract(0, 0.5));
 
-        $this->handlePlayer($gameLevel, $gameLevel->getPlayers()[0]);
+        return ($blockUnder->getId() === Block::QUARTZ_BLOCK);
     }
 
     /**
@@ -66,12 +80,6 @@ class PlayerCoinGiveTask extends Task {
      * @param Player $pl
      */
     private function handlePlayer(Level $gameLvl, Player $pl): void {
-        $blockUnder = $gameLvl->getBlock($pl->subtract(0, 0.5));
-
-        if($blockUnder->getId() !== Block::QUARTZ_BLOCK) {
-            return;
-        }
-
         $minPlayers = $this->hotBlock->getConfig()->get("players", 3);
 
         if(count($gameLvl->getPlayers()) < $minPlayers) {
