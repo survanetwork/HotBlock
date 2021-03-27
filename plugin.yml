@@ -1,10 +1,10 @@
 name: HotBlock
 main: surva\hotblock\HotBlock
-version: 1.1.4
+version: 1.1.5
 api: 3.0.0
 
 depend: ["EconomyAPI"]
 
 author: survanetwork
 description: A funny PvP minigame
-website: https://plugins.surva.network/#hotblock
+website: https://plugins.surva.net/#hotblock
