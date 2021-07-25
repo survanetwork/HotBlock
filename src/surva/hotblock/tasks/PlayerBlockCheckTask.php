@@ -11,35 +11,39 @@ use pocketmine\entity\EffectInstance;
 use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
 
-class PlayerBlockCheckTask extends Task {
+class PlayerBlockCheckTask extends Task
+{
+
     /* @var HotBlock */
     private $hotBlock;
 
     /**
      * PlayerBlockCheckTask constructor
      *
-     * @param HotBlock $hotBlock
+     * @param  HotBlock  $hotBlock
      */
-    public function __construct(HotBlock $hotBlock) {
+    public function __construct(HotBlock $hotBlock)
+    {
         $this->hotBlock = $hotBlock;
     }
 
     /**
      * Task run
      *
-     * @param int $currentTick
+     * @param  int  $currentTick
      */
-    public function onRun(int $currentTick): void {
+    public function onRun(int $currentTick): void
+    {
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
-        if(!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
+        if (!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
             return;
         }
 
-        foreach($gameLevel->getPlayers() as $playerInLevel) {
+        foreach ($gameLevel->getPlayers() as $playerInLevel) {
             $blockUnderPlayer = $gameLevel->getBlock($playerInLevel->subtract(0, 0.5));
 
-            switch($blockUnderPlayer->getId()) {
+            switch ($blockUnderPlayer->getId()) {
                 case Block::PLANKS:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.safe"));
                     break;
@@ -49,7 +53,7 @@ class PlayerBlockCheckTask extends Task {
                 case Block::NETHERRACK:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
 
-                    $effect = Effect::getEffectByName($this->hotBlock->getConfig()->get("effecttype", "POISON"));
+                    $effect   = Effect::getEffectByName($this->hotBlock->getConfig()->get("effecttype", "POISON"));
                     $duration = $this->hotBlock->getConfig()->get("effectduration", 3) * 20;
 
                     $playerInLevel->addEffect(new EffectInstance($effect, $duration));
@@ -57,4 +61,5 @@ class PlayerBlockCheckTask extends Task {
             }
         }
     }
+
 }
