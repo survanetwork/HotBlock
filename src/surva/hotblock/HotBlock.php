@@ -15,6 +15,8 @@ use surva\hotblock\tasks\PlayerCoinGiveTask;
 class HotBlock extends PluginBase
 {
 
+    private Config $defaultMessages;
+
     private Config $messages;
 
     private ?EconomyProvider $economyProvider;
@@ -26,7 +28,8 @@ class HotBlock extends PluginBase
     {
         $this->saveDefaultConfig();
 
-        $this->messages = new Config(
+        $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
+        $this->messages        = new Config(
           $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
@@ -64,17 +67,19 @@ class HotBlock extends PluginBase
      */
     public function getMessage(string $key, array $replaces = []): string
     {
-        if ($rawMessage = $this->messages->getNested($key)) {
-            if (is_array($replaces)) {
-                foreach ($replaces as $replace => $value) {
-                    $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
-                }
-            }
-
-            return $rawMessage;
+        if (($rawMessage = $this->messages->getNested($key)) === null) {
+            $rawMessage = $this->defaultMessages->getNested($key);
         }
 
-        return $key;
+        if ($rawMessage === null) {
+            return $key;
+        }
+
+        foreach ($replaces as $replace => $value) {
+            $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
+        }
+
+        return $rawMessage;
     }
 
     /**
