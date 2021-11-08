@@ -34,6 +34,8 @@
     <img src=".github/.media/feature-banner.png" width="650" height="365" alt="HotBlock plugin features">
 </p>
 
+✅ Ready for PocketMine-MP version 4.0 (PM4): checkout the [pm4 branch](https://github.com/survanetwork/HotBlock/tree/pm4) (still in beta).
+
 [• Description](#-description)  
 [• Features](#-features)  
 [• Usage](#-usage)  
