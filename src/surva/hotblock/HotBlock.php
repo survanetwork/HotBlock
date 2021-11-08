@@ -5,9 +5,10 @@
 
 namespace surva\hotblock;
 
-use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use surva\hotblock\economy\EconomyAPIProvider;
+use surva\hotblock\economy\EconomyProvider;
 use surva\hotblock\tasks\PlayerBlockCheckTask;
 use surva\hotblock\tasks\PlayerCoinGiveTask;
 
@@ -16,7 +17,7 @@ class HotBlock extends PluginBase
 
     private Config $messages;
 
-    private EconomyAPI $economy;
+    private ?EconomyProvider $economyProvider;
 
     /**
      * Plugin has been enabled, initial setup
@@ -29,7 +30,7 @@ class HotBlock extends PluginBase
           $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
-        $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+        $this->findEconomyPlugin();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
@@ -41,6 +42,16 @@ class HotBlock extends PluginBase
           new PlayerCoinGiveTask($this),
           $this->getConfig()->get("coinspeed", 0.25) * 20
         );
+    }
+
+    /**
+     * Find a loaded economy plugin and set the provider
+     */
+    private function findEconomyPlugin(): void
+    {
+        if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") !== null) {
+            $this->economyProvider = new EconomyAPIProvider();
+        }
     }
 
     /**
@@ -67,11 +78,11 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * @return EconomyAPI
+     * @return \surva\hotblock\economy\EconomyProvider|null
      */
-    public function getEconomy(): EconomyAPI
+    public function getEconomyProvider(): ?EconomyProvider
     {
-        return $this->economy;
+        return $this->economyProvider;
     }
 
 }

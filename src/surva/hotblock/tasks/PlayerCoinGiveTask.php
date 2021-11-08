@@ -102,14 +102,25 @@ class PlayerCoinGiveTask extends Task
     private function payCoins(Player $pl): void
     {
         $pl->sendTip($this->hotBlock->getMessage("block.move"));
-        $pl->sendTip(
-          $this->hotBlock->getMessage(
-            "block.coins",
-            ["count" => $this->hotBlock->getEconomy()->myMoney($pl)]
-          )
-        );
 
-        $this->hotBlock->getEconomy()->addMoney($pl, 1, false, "HotBlock");
+        $ep = $this->hotBlock->getEconomyProvider();
+
+        if ($ep === null) {
+            return;
+        }
+
+        $balance = $ep->get($pl);
+
+        if ($balance !== null) {
+            $pl->sendTip(
+              $this->hotBlock->getMessage(
+                "block.coins",
+                ["count" => $balance]
+              )
+            );
+        }
+
+        $ep->pay($pl, 1);
     }
 
 }
