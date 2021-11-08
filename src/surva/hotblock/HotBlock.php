@@ -14,11 +14,9 @@ use surva\hotblock\tasks\PlayerCoinGiveTask;
 class HotBlock extends PluginBase
 {
 
-    /* @var Config */
-    private $messages;
+    private Config $messages;
 
-    /* @var EconomyAPI */
-    private $economy;
+    private EconomyAPI $economy;
 
     /**
      * Plugin has been enabled, initial setup

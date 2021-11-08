@@ -5,58 +5,50 @@
 
 namespace surva\hotblock\tasks;
 
-use pocketmine\block\Block;
-use pocketmine\entity\Effect;
-use pocketmine\entity\EffectInstance;
+use pocketmine\block\BlockLegacyIds;
+use pocketmine\entity\effect\EffectInstance;
+use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
 
 class PlayerBlockCheckTask extends Task
 {
 
-    /* @var HotBlock */
-    private $hotBlock;
+    private HotBlock $hotBlock;
 
-    /**
-     * PlayerBlockCheckTask constructor
-     *
-     * @param  HotBlock  $hotBlock
-     */
     public function __construct(HotBlock $hotBlock)
     {
         $this->hotBlock = $hotBlock;
     }
 
     /**
-     * Task run
-     *
-     * @param  int  $currentTick
+     * Check if players are on specific blocks and send messages/effects
      */
-    public function onRun(int $currentTick): void
+    public function onRun(): void
     {
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
-        if (!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
+        if (!($gameWorld = $this->hotBlock->getServer()->getWorldManager()->getWorldByName($hbWorldName))) {
             return;
         }
 
-        foreach ($gameLevel->getPlayers() as $playerInLevel) {
-            $blockUnderPlayer = $gameLevel->getBlock($playerInLevel->subtract(0, 0.5));
+        foreach ($gameWorld->getPlayers() as $playerInLevel) {
+            $blockUnderPlayer = $gameWorld->getBlock($playerInLevel->getPosition()->subtract(0, 0.5, 0));
 
             switch ($blockUnderPlayer->getId()) {
-                case Block::PLANKS:
+                case BlockLegacyIds::PLANKS:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.safe"));
                     break;
-                case Block::END_STONE:
+                case BlockLegacyIds::END_STONE:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.run"));
                     break;
-                case Block::NETHERRACK:
+                case BlockLegacyIds::NETHERRACK:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
 
-                    $effect   = Effect::getEffectByName($this->hotBlock->getConfig()->get("effecttype", "POISON"));
+                    $effect   = VanillaEffects::fromString($this->hotBlock->getConfig()->get("effecttype", "POISON"));
                     $duration = $this->hotBlock->getConfig()->get("effectduration", 3) * 20;
 
-                    $playerInLevel->addEffect(new EffectInstance($effect, $duration));
+                    $playerInLevel->getEffects()->add(new EffectInstance($effect, $duration));
                     break;
             }
         }
