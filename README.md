@@ -34,7 +34,7 @@
     <img src=".github/.media/feature-banner.png" width="650" height="365" alt="HotBlock plugin features">
 </p>
 
-✅ Ready for PocketMine-MP version 4.0 (PM4): checkout the [pm4 branch](https://github.com/survanetwork/HotBlock/tree/pm4) (still in beta).
+✅ Ready for PocketMine-MP version 4.0 (PM4).
 
 [• Description](#-description)  
 [• Features](#-features)  
@@ -54,12 +54,12 @@ HotBlock is a funny PvP minigame. The goal is to stand as long as possible on th
 ## 🖱 Usage
 There are different types of blocks in the game arena:
 
-| Block | PvP | Effect |
-| --- | --- | --- |
-| `WOOD` | ❌ | All players are safe, usually they spawn there |
-| `ENDSTONE` | ✅ | Normal playing field, nothing special here |
-| `NETHERRACK` | ✅ | Players get poisoned for 2-3 seconds when walking over those blocks
-| `QUARTBLOCK` | ✅ | The HotBlock, players are earning some coins per second when moving on this block |
+| Block        | PvP | Effect                                                                            |
+|--------------|-----|-----------------------------------------------------------------------------------|
+| `WOOD`       | ❌   | All players are safe, usually they spawn there                                    |
+| `ENDSTONE`   | ✅   | Normal playing field, nothing special here                                        |
+| `NETHERRACK` | ✅   | Players get poisoned for 2-3 seconds when walking over those blocks               |
+| `QUARTBLOCK` | ✅   | The HotBlock, players are earning some coins per second when moving on this block |
 
 ### 🕹 Example Game Arena
 This is how a HotBlock-world can look like ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
