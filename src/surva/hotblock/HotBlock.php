@@ -5,20 +5,21 @@
 
 namespace surva\hotblock;
 
-use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use surva\hotblock\economy\EconomyAPIProvider;
+use surva\hotblock\economy\EconomyProvider;
 use surva\hotblock\tasks\PlayerBlockCheckTask;
 use surva\hotblock\tasks\PlayerCoinGiveTask;
 
 class HotBlock extends PluginBase
 {
 
-    /* @var Config */
-    private $messages;
+    private Config $defaultMessages;
 
-    /* @var EconomyAPI */
-    private $economy;
+    private Config $messages;
+
+    private ?EconomyProvider $economyProvider;
 
     /**
      * Plugin has been enabled, initial setup
@@ -27,11 +28,12 @@ class HotBlock extends PluginBase
     {
         $this->saveDefaultConfig();
 
-        $this->messages = new Config(
+        $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
+        $this->messages        = new Config(
           $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
-        $this->economy = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+        $this->findEconomyPlugin();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
@@ -46,6 +48,16 @@ class HotBlock extends PluginBase
     }
 
     /**
+     * Find a loaded economy plugin and set the provider
+     */
+    private function findEconomyPlugin(): void
+    {
+        if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") !== null) {
+            $this->economyProvider = new EconomyAPIProvider();
+        }
+    }
+
+    /**
      * Get a translated message
      *
      * @param  string  $key
@@ -55,25 +67,27 @@ class HotBlock extends PluginBase
      */
     public function getMessage(string $key, array $replaces = []): string
     {
-        if ($rawMessage = $this->messages->getNested($key)) {
-            if (is_array($replaces)) {
-                foreach ($replaces as $replace => $value) {
-                    $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
-                }
-            }
-
-            return $rawMessage;
+        if (($rawMessage = $this->messages->getNested($key)) === null) {
+            $rawMessage = $this->defaultMessages->getNested($key);
         }
 
-        return $key;
+        if ($rawMessage === null) {
+            return $key;
+        }
+
+        foreach ($replaces as $replace => $value) {
+            $rawMessage = str_replace("{" . $replace . "}", $value, $rawMessage);
+        }
+
+        return $rawMessage;
     }
 
     /**
-     * @return EconomyAPI
+     * @return \surva\hotblock\economy\EconomyProvider|null
      */
-    public function getEconomy(): EconomyAPI
+    public function getEconomyProvider(): ?EconomyProvider
     {
-        return $this->economy;
+        return $this->economyProvider;
     }
 
 }

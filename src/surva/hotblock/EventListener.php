@@ -5,22 +5,16 @@
 
 namespace surva\hotblock;
 
-use pocketmine\block\Block;
+use pocketmine\block\BlockLegacyIds;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class EventListener implements Listener
 {
 
-    /* @var HotBlock */
-    private $hotBlock;
+    private HotBlock $hotBlock;
 
-    /**
-     * EventListener constructor
-     *
-     * @param  HotBlock  $hotBlock
-     */
     public function __construct(HotBlock $hotBlock)
     {
         $this->hotBlock = $hotBlock;
@@ -39,14 +33,14 @@ class EventListener implements Listener
             return;
         }
 
-        $world       = $entity->getLevel();
+        $world       = $entity->getWorld();
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
-        if ($world->getName() === $hbWorldName) {
-            $blockUnder = $world->getBlock($entity->floor()->subtract(0, 1));
+        if ($world->getFolderName() === $hbWorldName) {
+            $blockUnder = $world->getBlock($entity->getPosition()->floor()->subtract(0, 1, 0));
 
-            if ($blockUnder->getId() === Block::PLANKS) {
-                $event->setCancelled();
+            if ($blockUnder->getId() === BlockLegacyIds::PLANKS) {
+                $event->cancel();
             }
         }
     }

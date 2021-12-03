@@ -5,38 +5,30 @@
 
 namespace surva\hotblock\tasks;
 
-use pocketmine\block\Block;
-use pocketmine\level\Level;
-use pocketmine\Player;
+use pocketmine\block\BlockLegacyIds;
+use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
+use pocketmine\world\World;
 use surva\hotblock\HotBlock;
 
 class PlayerCoinGiveTask extends Task
 {
 
-    /* @var HotBlock */
-    private $hotBlock;
+    private HotBlock $hotBlock;
 
-    /**
-     * PlayerCoinGiveTask constructor
-     *
-     * @param  HotBlock  $hotBlock
-     */
     public function __construct(HotBlock $hotBlock)
     {
         $this->hotBlock = $hotBlock;
     }
 
     /**
-     * Task run
-     *
-     * @param  int  $currentTick
+     * Give coins to players standing on the HotBlock
      */
-    public function onRun(int $currentTick): void
+    public function onRun(): void
     {
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
-        if (!($gameLevel = $this->hotBlock->getServer()->getLevelByName($hbWorldName))) {
+        if (!($gameWorld = $this->hotBlock->getServer()->getWorldManager()->getWorldByName($hbWorldName))) {
             return;
         }
 
@@ -45,8 +37,8 @@ class PlayerCoinGiveTask extends Task
         if ($onlyOnePlayer === true) {
             $playersOnBlock = 0;
 
-            foreach ($gameLevel->getPlayers() as $playerInLevel) {
-                if ($this->isPlayerOnHotBlock($gameLevel, $playerInLevel)) {
+            foreach ($gameWorld->getPlayers() as $playerInLevel) {
+                if ($this->isPlayerOnHotBlock($gameWorld, $playerInLevel)) {
                     $playersOnBlock++;
                 }
             }
@@ -56,9 +48,9 @@ class PlayerCoinGiveTask extends Task
             }
         }
 
-        foreach ($gameLevel->getPlayers() as $playerInLevel) {
-            if ($this->isPlayerOnHotBlock($gameLevel, $playerInLevel)) {
-                $this->handlePlayer($gameLevel, $playerInLevel);
+        foreach ($gameWorld->getPlayers() as $playerInLevel) {
+            if ($this->isPlayerOnHotBlock($gameWorld, $playerInLevel)) {
+                $this->handlePlayer($gameWorld, $playerInLevel);
             }
         }
     }
@@ -66,29 +58,29 @@ class PlayerCoinGiveTask extends Task
     /**
      * Check if a player is standing on the HotBlock
      *
-     * @param  \pocketmine\level\Level  $gameLvl
-     * @param  \pocketmine\Player  $pl
+     * @param  \pocketmine\world\World  $gameWld
+     * @param  \pocketmine\player\Player  $pl
      *
      * @return bool
      */
-    private function isPlayerOnHotBlock(Level $gameLvl, Player $pl): bool
+    private function isPlayerOnHotBlock(World $gameWld, Player $pl): bool
     {
-        $blockUnder = $gameLvl->getBlock($pl->subtract(0, 0.5));
+        $blockUnder = $gameWld->getBlock($pl->getPosition()->subtract(0, 0.5, 0));
 
-        return ($blockUnder->getId() === Block::QUARTZ_BLOCK);
+        return ($blockUnder->getId() === BlockLegacyIds::QUARTZ_BLOCK);
     }
 
     /**
      * Handle coin giving of a player
      *
-     * @param  Level  $gameLvl
-     * @param  Player  $pl
+     * @param  \pocketmine\world\World  $gameWld
+     * @param  \pocketmine\player\Player  $pl
      */
-    private function handlePlayer(Level $gameLvl, Player $pl): void
+    private function handlePlayer(World $gameWld, Player $pl): void
     {
         $minPlayers = $this->hotBlock->getConfig()->get("players", 3);
 
-        if (count($gameLvl->getPlayers()) < $minPlayers) {
+        if (count($gameWld->getPlayers()) < $minPlayers) {
             $pl->sendTip(
               $this->hotBlock->getMessage(
                 "block.lessplayers",
@@ -110,14 +102,25 @@ class PlayerCoinGiveTask extends Task
     private function payCoins(Player $pl): void
     {
         $pl->sendTip($this->hotBlock->getMessage("block.move"));
-        $pl->sendTip(
-          $this->hotBlock->getMessage(
-            "block.coins",
-            ["count" => $this->hotBlock->getEconomy()->myMoney($pl)]
-          )
-        );
 
-        $this->hotBlock->getEconomy()->addMoney($pl, 1, false, "HotBlock");
+        $ep = $this->hotBlock->getEconomyProvider();
+
+        if ($ep === null) {
+            return;
+        }
+
+        $balance = $ep->get($pl);
+
+        if ($balance !== null) {
+            $pl->sendTip(
+              $this->hotBlock->getMessage(
+                "block.coins",
+                ["count" => $balance]
+              )
+            );
+        }
+
+        $ep->pay($pl, 1);
     }
 
 }
