@@ -1,0 +1,21 @@
+#  _   _       _   ____  _            _
+# | | | | ___ | |_| __ )| | ___   ___| | __
+# | |_| |/ _ \| __|  _ \| |/ _ \ / __| |/ /
+# |  _  | (_) | |_| |_) | | (_) | (__|   <
+# |_| |_|\___/ \__|____/|_|\___/ \___|_|\_\
+#
+# (C) 2018 by surva network | https://github.com/survanetwork
+
+# Indonesian language
+
+# Status messages based on the ground
+ground:
+  safe: "§aKamu aman!"
+  run: "§ePergilah! Lari dari pemain yang lain!"
+  poisoned: "§cKamu keracunan!"
+
+# Messages on the HotBlock
+block:
+  lessplayers: "§6Harus ada setidaknya §f{count} §6 pemain online untuk memainkan game."
+  move: "§eAnda berdiri di §l§cHot§6Block§r§e! §bBergerak!"
+  coins: "§bAnda memiliki §f{count} §bKoin."
