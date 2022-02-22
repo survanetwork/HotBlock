@@ -7,7 +7,7 @@ namespace surva\hotblock\tasks;
 
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\entity\effect\EffectInstance;
-use pocketmine\entity\effect\VanillaEffects;
+use pocketmine\entity\effect\StringToEffectParser;
 use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
 
@@ -45,10 +45,15 @@ class PlayerBlockCheckTask extends Task
                 case BlockLegacyIds::NETHERRACK:
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
 
-                    $effect   = VanillaEffects::fromString($this->hotBlock->getConfig()->get("effecttype", "POISON"));
-                    $duration = $this->hotBlock->getConfig()->get("effectduration", 3) * 20;
+                    $effect = StringToEffectParser::getInstance()->parse(
+                      $this->hotBlock->getConfig()->get("effecttype", "POISON")
+                    );
 
-                    $playerInLevel->getEffects()->add(new EffectInstance($effect, $duration));
+                    if ($effect !== null) {
+                        $duration = $this->hotBlock->getConfig()->get("effectduration", 3) * 20;
+
+                        $playerInLevel->getEffects()->add(new EffectInstance($effect, $duration));
+                    }
                     break;
             }
         }
