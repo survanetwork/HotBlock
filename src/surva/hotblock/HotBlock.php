@@ -19,7 +19,7 @@ class HotBlock extends PluginBase
 
     private Config $messages;
 
-    private ?EconomyProvider $economyProvider;
+    private ?EconomyProvider $economyProvider = null;
 
     /**
      * Plugin has been enabled, initial setup
