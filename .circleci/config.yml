@@ -1,0 +1,60 @@
+version: 2
+
+jobs:
+  phpstan:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      # Checkout branch
+      - checkout
+
+      # Install Composer dependencies
+      - restore_cache:
+          key: composer-{{ checksum "composer.json" }}
+      - run: composer install --ignore-platform-reqs
+      - save_cache:
+          key: composer-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+
+      # Create result folder
+      - run: mkdir -p test-results/phpstan-result
+
+      # Run code analysis with PHPStan
+      - run: composer code-analyze-save-report
+
+      # Save code analysis results
+      - store_test_results:
+          path: test-results
+  phpcs:
+    docker:
+      - image: cimg/php:8.0
+    steps:
+      # Checkout branch
+      - checkout
+
+      # Install Composer dependencies
+      - restore_cache:
+          key: composer-{{ checksum "composer.json" }}
+      - run: composer install --ignore-platform-reqs
+      - save_cache:
+          key: composer-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+
+      # Create result folder
+      - run: mkdir -p test-results/phpcs-result
+
+      # Run code style check with PHP_CodeSniffer
+      - run: composer check-format-save-report
+
+      # Save code style check results
+      - store_test_results:
+          path: test-results
+
+workflows:
+  version: 2
+  code_checks:
+    jobs:
+      - phpstan
+      - phpcs
