@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | player coin giving task
  */
@@ -13,7 +14,6 @@ use surva\hotblock\HotBlock;
 
 class PlayerCoinGiveTask extends Task
 {
-
     private HotBlock $hotBlock;
 
     public function __construct(HotBlock $hotBlock)
@@ -82,10 +82,10 @@ class PlayerCoinGiveTask extends Task
 
         if (count($gameWld->getPlayers()) < $minPlayers) {
             $pl->sendTip(
-              $this->hotBlock->getMessage(
-                "block.lessplayers",
-                ["count" => $minPlayers]
-              )
+                $this->hotBlock->getMessage(
+                    "block.lessplayers",
+                    ["count" => $minPlayers]
+                )
             );
 
             return;
@@ -113,14 +113,13 @@ class PlayerCoinGiveTask extends Task
 
         if ($balance !== null) {
             $pl->sendTip(
-              $this->hotBlock->getMessage(
-                "block.coins",
-                ["count" => $balance]
-              )
+                $this->hotBlock->getMessage(
+                    "block.coins",
+                    ["count" => $balance]
+                )
             );
         }
 
         $ep->pay($pl, 1);
     }
-
 }

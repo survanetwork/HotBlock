@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | event listener
  */
@@ -12,7 +13,6 @@ use pocketmine\player\Player;
 
 class EventListener implements Listener
 {
-
     private HotBlock $hotBlock;
 
     public function __construct(HotBlock $hotBlock)
@@ -44,5 +44,4 @@ class EventListener implements Listener
             }
         }
     }
-
 }

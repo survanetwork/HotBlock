@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | plugin main class
  */
@@ -14,7 +15,6 @@ use surva\hotblock\tasks\PlayerCoinGiveTask;
 
 class HotBlock extends PluginBase
 {
-
     private Config $defaultMessages;
 
     private Config $messages;
@@ -30,7 +30,7 @@ class HotBlock extends PluginBase
 
         $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
         $this->messages        = new Config(
-          $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
+            $this->getFile() . "resources/languages/" . $this->getConfig()->get("language", "en") . ".yml"
         );
 
         $this->findEconomyPlugin();
@@ -38,12 +38,12 @@ class HotBlock extends PluginBase
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(
-          new PlayerBlockCheckTask($this),
-          $this->getConfig()->get("checkspeed", 0.25) * 20
+            new PlayerBlockCheckTask($this),
+            $this->getConfig()->get("checkspeed", 0.25) * 20
         );
         $this->getScheduler()->scheduleRepeatingTask(
-          new PlayerCoinGiveTask($this),
-          $this->getConfig()->get("coinspeed", 0.25) * 20
+            new PlayerCoinGiveTask($this),
+            $this->getConfig()->get("coinspeed", 0.25) * 20
         );
     }
 
@@ -89,5 +89,4 @@ class HotBlock extends PluginBase
     {
         return $this->economyProvider;
     }
-
 }

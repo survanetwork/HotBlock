@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | general economy provider
  */
@@ -9,7 +10,6 @@ use pocketmine\player\Player;
 
 interface EconomyProvider
 {
-
     /**
      * Pay a specific amount of money to a player
      *
@@ -26,5 +26,4 @@ interface EconomyProvider
      * @return int|null
      */
     public function get(Player $pl): ?int;
-
 }

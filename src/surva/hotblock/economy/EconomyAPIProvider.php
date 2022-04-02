@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | provider for EconomyAPI plugin
  */
@@ -11,7 +12,6 @@ use pocketmine\Server;
 
 class EconomyAPIProvider implements EconomyProvider
 {
-
     private ?EconomyAPI $api;
 
     /**
@@ -51,5 +51,4 @@ class EconomyAPIProvider implements EconomyProvider
 
         return null;
     }
-
 }

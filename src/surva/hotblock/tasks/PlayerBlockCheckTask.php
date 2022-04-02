@@ -1,4 +1,5 @@
 <?php
+
 /**
  * HotBlock | player block checking task
  */
@@ -13,7 +14,6 @@ use surva\hotblock\HotBlock;
 
 class PlayerBlockCheckTask extends Task
 {
-
     private HotBlock $hotBlock;
 
     public function __construct(HotBlock $hotBlock)
@@ -46,7 +46,7 @@ class PlayerBlockCheckTask extends Task
                     $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
 
                     $effect = StringToEffectParser::getInstance()->parse(
-                      $this->hotBlock->getConfig()->get("effecttype", "POISON")
+                        $this->hotBlock->getConfig()->get("effecttype", "POISON")
                     );
 
                     if ($effect !== null) {
@@ -58,5 +58,4 @@ class PlayerBlockCheckTask extends Task
             }
         }
     }
-
 }
