@@ -53,9 +53,9 @@ class HotBlock extends PluginBase
      */
     private function findEconomyPlugin(): void
     {
-        if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") !== null) {
+        if ($this->getServer()->getPluginManager()->getPlugin(EconomyAPIProvider::PLUGIN_NAME) !== null) {
             $this->economyProvider = new EconomyAPIProvider();
-        } elseif ($this->getServer()->getPluginManager()->getPlugin("Capital") !== null) {
+        } elseif ($this->getServer()->getPluginManager()->getPlugin(CapitalProvider::PLUGIN_NAME) !== null) {
             $this->economyProvider = new CapitalProvider($this->getConfig());
         }
     }

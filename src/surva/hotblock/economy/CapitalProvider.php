@@ -17,6 +17,8 @@ use SOFe\InfoAPI\PlayerInfo;
 
 class CapitalProvider implements EconomyProvider
 {
+    public const PLUGIN_NAME = "Capital";
+
     private ?Complete $selector;
 
     /**

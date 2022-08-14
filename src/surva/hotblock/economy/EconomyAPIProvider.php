@@ -12,6 +12,8 @@ use pocketmine\Server;
 
 class EconomyAPIProvider implements EconomyProvider
 {
+    public const PLUGIN_NAME = "EconomyAPI";
+
     private ?EconomyAPI $api;
 
     /**
@@ -33,7 +35,7 @@ class EconomyAPIProvider implements EconomyProvider
             return false;
         }
 
-        $res = $this->api->addMoney($pl, 1, false, "HotBlock");
+        $res = $this->api->addMoney($pl, $moneyAmount, false, "HotBlock");
 
         return $res === EconomyAPI::RET_SUCCESS;
     }
