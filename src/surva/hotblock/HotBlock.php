@@ -8,6 +8,7 @@ namespace surva\hotblock;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use surva\hotblock\economy\CapitalProvider;
 use surva\hotblock\economy\EconomyAPIProvider;
 use surva\hotblock\economy\EconomyProvider;
 use surva\hotblock\tasks\PlayerBlockCheckTask;
@@ -54,6 +55,8 @@ class HotBlock extends PluginBase
     {
         if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") !== null) {
             $this->economyProvider = new EconomyAPIProvider();
+        } elseif ($this->getServer()->getPluginManager()->getPlugin("Capital") !== null) {
+            $this->economyProvider = new CapitalProvider($this->getConfig());
         }
     }
 

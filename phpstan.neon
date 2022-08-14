@@ -4,3 +4,5 @@ parameters:
     - src
   ignoreErrors:
     - "#onebone.economyapi.EconomyAPI#"
+    - "#SOFe.Capital.*#"
+    - "#SOFe.InfoAPI.*#"
