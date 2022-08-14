@@ -73,7 +73,9 @@ class HotBlock extends PluginBase
      */
     public function getMessage(string $key, array $replaces = []): string
     {
-        if (($rawMessage = $this->messages->getNested($key)) === null) {
+        $rawMessage = $this->messages->getNested($key);
+
+        if ($rawMessage === null || $rawMessage === "") {
             $rawMessage = $this->defaultMessages->getNested($key);
         }
 
