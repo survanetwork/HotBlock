@@ -6,3 +6,4 @@ parameters:
     - "#onebone.economyapi.EconomyAPI#"
     - "#SOFe.Capital.*#"
     - "#SOFe.InfoAPI.*#"
+    - "#cooldogedev.BedrockEconomy.*#"

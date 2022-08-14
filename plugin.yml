@@ -3,7 +3,7 @@ main: surva\hotblock\HotBlock
 version: 1.1.7
 api: 4.0.0
 
-softdepend: ["EconomyAPI", "Capital", "InfoAPI"]
+softdepend: ["EconomyAPI", "BedrockEconomy", "Capital", "InfoAPI"]
 
 author: survanetwork
 description: A funny PvP minigame

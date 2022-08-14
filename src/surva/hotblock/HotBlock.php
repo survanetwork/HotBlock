@@ -8,6 +8,7 @@ namespace surva\hotblock;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use surva\hotblock\economy\BedrockEconomyProvider;
 use surva\hotblock\economy\CapitalProvider;
 use surva\hotblock\economy\EconomyAPIProvider;
 use surva\hotblock\economy\EconomyProvider;
@@ -57,6 +58,8 @@ class HotBlock extends PluginBase
             $this->economyProvider = new EconomyAPIProvider();
         } elseif ($this->getServer()->getPluginManager()->getPlugin(CapitalProvider::PLUGIN_NAME) !== null) {
             $this->economyProvider = new CapitalProvider($this->getConfig());
+        } elseif ($this->getServer()->getPluginManager()->getPlugin(BedrockEconomyProvider::PLUGIN_NAME) !== null) {
+            $this->economyProvider = new BedrockEconomyProvider();
         }
     }
 
