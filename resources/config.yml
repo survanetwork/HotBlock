@@ -13,6 +13,18 @@ language: "en"
 # Name of the world where the game is in
 world: "world"
 
+# Area restriction, only enable the game between these two coordinate positions (uncomment to enable)
+# If not uncommented, the whole world specified above will be used
+#area:
+  #pos1:
+    #x: -50
+    #y: 50
+    #z: -50
+  #pos2:
+    #x: 50
+    #y: 100
+    #z: 50
+
 # How many players must be online that the block is active (prevent that one player is getting coins alone)
 players: 3
 

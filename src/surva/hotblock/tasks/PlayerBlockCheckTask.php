@@ -33,6 +33,10 @@ class PlayerBlockCheckTask extends Task
         }
 
         foreach ($gameWorld->getPlayers() as $playerInLevel) {
+            if (!$this->hotBlock->isInGameArea($playerInLevel)) {
+                continue;
+            }
+
             $blockUnderPlayer = $gameWorld->getBlock($playerInLevel->getPosition()->subtract(0, 0.5, 0));
 
             switch ($blockUnderPlayer->getId()) {

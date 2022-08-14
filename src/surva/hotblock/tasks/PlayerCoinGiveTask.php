@@ -38,6 +38,10 @@ class PlayerCoinGiveTask extends Task
             $playersOnBlock = 0;
 
             foreach ($gameWorld->getPlayers() as $playerInLevel) {
+                if (!$this->hotBlock->isInGameArea($playerInLevel)) {
+                    continue;
+                }
+
                 if ($this->isPlayerOnHotBlock($gameWorld, $playerInLevel)) {
                     $playersOnBlock++;
                 }
@@ -49,6 +53,10 @@ class PlayerCoinGiveTask extends Task
         }
 
         foreach ($gameWorld->getPlayers() as $playerInLevel) {
+            if (!$this->hotBlock->isInGameArea($playerInLevel)) {
+                continue;
+            }
+
             if ($this->isPlayerOnHotBlock($gameWorld, $playerInLevel)) {
                 $this->handlePlayer($gameWorld, $playerInLevel);
             }

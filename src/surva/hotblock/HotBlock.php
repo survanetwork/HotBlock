@@ -6,6 +6,7 @@
 
 namespace surva\hotblock;
 
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use surva\hotblock\economy\BedrockEconomyProvider;
@@ -61,6 +62,60 @@ class HotBlock extends PluginBase
         } elseif ($this->getServer()->getPluginManager()->getPlugin(BedrockEconomyProvider::PLUGIN_NAME) !== null) {
             $this->economyProvider = new BedrockEconomyProvider();
         }
+    }
+
+    /**
+     * Check if a player is inside the game area
+     *
+     * @param  \pocketmine\player\Player  $pl
+     *
+     * @return bool
+     */
+    public function isInGameArea(Player $pl): bool
+    {
+        $conf = $this->getConfig();
+
+        if (!$conf->exists("area")) {
+            return true;
+        }
+
+        $ax = $conf->getNested("area.pos1.x");
+        $ay = $conf->getNested("area.pos1.y");
+        $az = $conf->getNested("area.pos1.z");
+
+        $bx = $conf->getNested("area.pos2.x");
+        $by = $conf->getNested("area.pos2.y");
+        $bz = $conf->getNested("area.pos2.z");
+
+        $px = $pl->getPosition()->getX();
+        $py = $pl->getPosition()->getY();
+        $pz = $pl->getPosition()->getZ();
+
+        if ($bx > $ax) {
+            if ($px < $ax || $px > $bx) {
+                return false;
+            }
+        } elseif ($px > $ax || $px < $bx) {
+                return false;
+        }
+
+        if ($by > $ay) {
+            if ($py < $ay || $py > $by) {
+                return false;
+            }
+        } elseif ($py > $ay || $py < $by) {
+            return false;
+        }
+
+        if ($bz > $az) {
+            if ($pz < $az || $pz > $bz) {
+                return false;
+            }
+        } elseif ($pz > $az || $pz < $bz) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

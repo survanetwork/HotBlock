@@ -36,7 +36,7 @@ class EventListener implements Listener
         $world       = $entity->getWorld();
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
-        if ($world->getFolderName() === $hbWorldName) {
+        if ($world->getFolderName() === $hbWorldName && $this->hotBlock->isInGameArea($entity)) {
             $blockUnder = $world->getBlock($entity->getPosition()->floor()->subtract(0, 1, 0));
 
             if ($blockUnder->getId() === BlockLegacyIds::PLANKS) {
