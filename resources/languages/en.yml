@@ -6,8 +6,6 @@
 #
 # (C) 2018 by surva network | https://github.com/survanetwork
 
-# English language
-
 # Status messages based on the ground
 ground:
   safe: "§aYou're safe!"
