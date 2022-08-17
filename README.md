@@ -44,7 +44,9 @@
 [• License](#%EF%B8%8F-license)
 
 ## 📙 Description
-HotBlock is a funny PvP minigame. The goal is to stand as long as possible on the 'Hot Block' in the middle of the arena in order to earn money (via EconomyAPI). Because every player wants to get there, there is an exiting PvP-match. The dangerous poisoned blocks are making the game even more exiting.
+HotBlock is a funny PvP mini-game.
+The goal is to stand as long as possible on the 'Hot Block' in the middle of the arena in order to earn money (using a supported economy plugin).
+Because every player wants to get there, there is an exiting PvP-match. The dangerous poisoned blocks are making the game even more exiting.
 
 ## 🎁 Features
 - **OPEN ARENA** Open Game Arena where players can join at any time
@@ -62,9 +64,9 @@ There are different types of blocks in the game arena:
 | `QUARTBLOCK` | ✅   | The HotBlock, players are earning some coins per second when moving on this block |
 
 ### 🕹 Example Game Arena
-This is how a HotBlock-world can look like ([you can download it here](https://github.com/survanetwork/HotBlock/files/1120370/HotBlock.zip)):
+This is how a HotBlock world could look like ([download the example world here](https://static.surva.net/osplugins/hotblock/HotBlock_example_world.zip)):
 
-![](http://i.imgur.com/TgobyZ1.jpg)
+![HotBlock example world](https://static.surva.net/osplugins/hotblock/example_world_screenshot.jpg)
 
 [Read the full documentation 📖](https://plugins.surva.net/docs/HotBlock) • [Ask questions on Discord 💬](https://discord.gg/t4Kg4j3829)
 
