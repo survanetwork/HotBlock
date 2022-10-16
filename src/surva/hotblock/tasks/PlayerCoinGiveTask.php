@@ -11,6 +11,7 @@ use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\world\World;
 use surva\hotblock\HotBlock;
+use surva\hotblock\utils\Messages;
 
 class PlayerCoinGiveTask extends Task
 {
@@ -89,8 +90,10 @@ class PlayerCoinGiveTask extends Task
         $minPlayers = $this->hotBlock->getConfig()->get("players", 3);
 
         if (count($gameWld->getPlayers()) < $minPlayers) {
+            $messages = new Messages($this->hotBlock, $pl);
+
             $pl->sendTip(
-                $this->hotBlock->getMessage(
+                $messages->getMessage(
                     "block.lessplayers",
                     ["count" => $minPlayers]
                 )
@@ -109,7 +112,9 @@ class PlayerCoinGiveTask extends Task
      */
     private function payCoins(Player $pl): void
     {
-        $pl->sendTip($this->hotBlock->getMessage("block.move"));
+        $messages = new Messages($this->hotBlock, $pl);
+
+        $pl->sendTip($messages->getMessage("block.move"));
 
         $ep = $this->hotBlock->getEconomyProvider();
 
@@ -121,7 +126,7 @@ class PlayerCoinGiveTask extends Task
 
         if ($balance !== null) {
             $pl->sendTip(
-                $this->hotBlock->getMessage(
+                $messages->getMessage(
                     "block.coins",
                     ["count" => $balance]
                 )

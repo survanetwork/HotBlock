@@ -10,6 +10,10 @@
 # Possible options are: en (English), de (German), fr (French), tr (Turkish), id (Indonesian)
 language: "en"
 
+# Try to automatically detect the player's language and send translated messages for each player
+# (language set above is used if player's language can't be detected)
+autodetectlanguage: true
+
 # Name of the world where the game is in
 world: "world"
 

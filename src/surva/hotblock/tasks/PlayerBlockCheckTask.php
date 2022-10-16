@@ -11,6 +11,7 @@ use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\StringToEffectParser;
 use pocketmine\scheduler\Task;
 use surva\hotblock\HotBlock;
+use surva\hotblock\utils\Messages;
 
 class PlayerBlockCheckTask extends Task
 {
@@ -39,15 +40,17 @@ class PlayerBlockCheckTask extends Task
 
             $blockUnderPlayer = $gameWorld->getBlock($playerInLevel->getPosition()->subtract(0, 0.5, 0));
 
+            $messages = new Messages($this->hotBlock, $playerInLevel);
+
             switch ($blockUnderPlayer->getId()) {
                 case BlockLegacyIds::PLANKS:
-                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.safe"));
+                    $playerInLevel->sendTip($messages->getMessage("ground.safe"));
                     break;
                 case BlockLegacyIds::END_STONE:
-                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.run"));
+                    $playerInLevel->sendTip($messages->getMessage("ground.run"));
                     break;
                 case BlockLegacyIds::NETHERRACK:
-                    $playerInLevel->sendTip($this->hotBlock->getMessage("ground.poisoned"));
+                    $playerInLevel->sendTip($messages->getMessage("ground.poisoned"));
 
                     $effect = StringToEffectParser::getInstance()->parse(
                         $this->hotBlock->getConfig()->get("effecttype", "POISON")
