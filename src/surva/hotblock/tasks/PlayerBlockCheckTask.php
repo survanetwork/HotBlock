@@ -6,7 +6,7 @@
 
 namespace surva\hotblock\tasks;
 
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\StringToEffectParser;
 use pocketmine\scheduler\Task;
@@ -42,14 +42,14 @@ class PlayerBlockCheckTask extends Task
 
             $messages = new Messages($this->hotBlock, $playerInLevel);
 
-            switch ($blockUnderPlayer->getId()) {
-                case BlockLegacyIds::PLANKS:
+            switch ($blockUnderPlayer->getTypeId()) {
+                case VanillaBlocks::OAK_PLANKS()->getTypeId():
                     $playerInLevel->sendTip($messages->getMessage("ground.safe"));
                     break;
-                case BlockLegacyIds::END_STONE:
+                case VanillaBlocks::END_STONE()->getTypeId():
                     $playerInLevel->sendTip($messages->getMessage("ground.run"));
                     break;
-                case BlockLegacyIds::NETHERRACK:
+                case VanillaBlocks::NETHERRACK()->getTypeId():
                     $playerInLevel->sendTip($messages->getMessage("ground.poisoned"));
 
                     $effect = StringToEffectParser::getInstance()->parse(

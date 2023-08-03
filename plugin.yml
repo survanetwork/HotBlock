@@ -1,7 +1,7 @@
 name: HotBlock
 main: surva\hotblock\HotBlock
 version: 1.2.1
-api: 4.0.0
+api: 5.0.0
 
 softdepend: ["EconomyAPI", "BedrockEconomy", "Capital", "InfoAPI"]
 

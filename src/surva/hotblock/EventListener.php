@@ -6,7 +6,7 @@
 
 namespace surva\hotblock;
 
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
 use pocketmine\player\Player;
@@ -39,7 +39,7 @@ class EventListener implements Listener
         if ($world->getFolderName() === $hbWorldName && $this->hotBlock->isInGameArea($entity)) {
             $blockUnder = $world->getBlock($entity->getPosition()->floor()->subtract(0, 1, 0));
 
-            if ($blockUnder->getId() === BlockLegacyIds::PLANKS) {
+            if ($blockUnder->hasSameTypeId(VanillaBlocks::OAK_PLANKS())) {
                 $event->cancel();
             }
         }
