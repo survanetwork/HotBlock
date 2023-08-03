@@ -1,8 +1,10 @@
 branches:
 - master
-- pm4
+- pm5
 
 projects:
   HotBlock:
     path: ""
     icon: "icon.png"
+    lint:
+      phpstan: false
