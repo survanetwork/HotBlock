@@ -6,7 +6,7 @@
 
 namespace surva\hotblock\tasks;
 
-use pocketmine\block\BlockLegacyIds;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\world\World;
@@ -76,7 +76,7 @@ class PlayerCoinGiveTask extends Task
     {
         $blockUnder = $gameWld->getBlock($pl->getPosition()->subtract(0, 0.5, 0));
 
-        return ($blockUnder->getId() === BlockLegacyIds::QUARTZ_BLOCK);
+        return ($blockUnder->hasSameTypeId(VanillaBlocks::QUARTZ()));
     }
 
     /**
