@@ -18,6 +18,7 @@ use surva\hotblock\economy\EconomyProvider;
 use surva\hotblock\tasks\PlayerBlockCheckTask;
 use surva\hotblock\tasks\PlayerCoinGiveTask;
 use surva\hotblock\utils\Messages;
+use Symfony\Component\Filesystem\Path;
 
 class HotBlock extends PluginBase
 {
@@ -40,7 +41,8 @@ class HotBlock extends PluginBase
     {
         $this->saveDefaultConfig();
 
-        $this->defaultMessages = new Config($this->getFile() . "resources/languages/en.yml");
+        $this->saveResource(Path::join("languages", "en.yml"), true);
+        $this->defaultMessages = new Config(Path::join($this->getDataFolder(), "languages", "en.yml"));
         $this->loadLanguageFiles();
 
         $this->findEconomyPlugin();
@@ -148,18 +150,14 @@ class HotBlock extends PluginBase
      */
     private function loadLanguageFiles(): void
     {
-        $languageFilesDir = $this->getFile() . "resources/languages/";
+        $resources = $this->getResources();
 
-        foreach (new DirectoryIterator($languageFilesDir) as $dirObj) {
-            if (!($dirObj instanceof DirectoryIterator)) {
+        foreach ($resources as $resource) {
+            if (!preg_match("/languages\/[a-z]{2}.yml$/", $resource->getPathname())) {
                 continue;
             }
 
-            if (!$dirObj->isFile() || !str_ends_with($dirObj->getFilename(), ".yml")) {
-                continue;
-            }
-
-            preg_match("/^[a-z][a-z]/", $dirObj->getFilename(), $fileNameRes);
+            preg_match("/^[a-z][a-z]/", $resource->getFilename(), $fileNameRes);
 
             if (!isset($fileNameRes[0])) {
                 continue;
@@ -167,8 +165,9 @@ class HotBlock extends PluginBase
 
             $langId = $fileNameRes[0];
 
+            $this->saveResource(Path::join("languages", $langId . ".yml"), true);
             $this->translationMessages[$langId] = new Config(
-                $this->getFile() . "resources/languages/" . $langId . ".yml"
+                Path::join($this->getDataFolder(), "languages", $langId . ".yml")
             );
         }
     }
