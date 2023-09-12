@@ -15,12 +15,12 @@ class BedrockEconomyProvider implements EconomyProvider
     public const PLUGIN_NAME = "BedrockEconomy";
 
     /**
-     * @var array last pay results
+     * @var bool[] last pay results
      */
     private array $payResCache;
 
     /**
-     * @var array last player balance results
+     * @var (int|null)[] last player balance results
      */
     private array $getResCache;
 
