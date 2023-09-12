@@ -153,7 +153,8 @@ class HotBlock extends PluginBase
         $resources = $this->getResources();
 
         foreach ($resources as $resource) {
-            if (!preg_match("/languages\/[a-z]{2}.yml$/", $resource->getPathname())) {
+            $normalizedPath = Path::normalize($resource->getPathname());
+            if (!preg_match("/languages\/[a-z]{2}.yml$/", $normalizedPath)) {
                 continue;
             }
 
