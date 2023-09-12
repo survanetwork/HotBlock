@@ -128,7 +128,7 @@ class PlayerCoinGiveTask extends Task
             $pl->sendTip(
                 $messages->getMessage(
                     "block.coins",
-                    ["count" => $balance]
+                    ["count" => (string) $balance]
                 )
             );
         }

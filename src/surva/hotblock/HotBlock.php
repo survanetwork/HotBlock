@@ -6,7 +6,6 @@
 
 namespace surva\hotblock;
 
-use DirectoryIterator;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
@@ -28,7 +27,7 @@ class HotBlock extends PluginBase
     private Config $defaultMessages;
 
     /**
-     * @var array available language configs
+     * @var Config[] available language configs
      */
     private array $translationMessages;
 
@@ -132,7 +131,7 @@ class HotBlock extends PluginBase
      *
      * @param  \pocketmine\command\CommandSender  $sender
      * @param  string  $key
-     * @param  array  $replaces
+     * @param  string[]  $replaces
      *
      * @return void
      */
@@ -175,7 +174,7 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * @return array
+     * @return \pocketmine\utils\Config[]
      */
     public function getTranslationMessages(): array
     {
