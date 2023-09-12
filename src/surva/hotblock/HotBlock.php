@@ -151,6 +151,7 @@ class HotBlock extends PluginBase
     private function loadLanguageFiles(): void
     {
         $resources = $this->getResources();
+        $this->translationMessages = [];
 
         foreach ($resources as $resource) {
             $normalizedPath = Path::normalize($resource->getPathname());

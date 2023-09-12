@@ -44,10 +44,11 @@ class Messages
 
         $defaultLangId = $this->hotBlock->getConfig()->get("language", "en");
 
-        if ($prefLangId !== null) {
-            $langConfig = $this->hotBlock->getTranslationMessages()[$prefLangId];
+        $tm = $this->hotBlock->getTranslationMessages();
+        if ($prefLangId !== null && isset($tm[$prefLangId])) {
+            $langConfig = $tm[$prefLangId];
         } else {
-            $langConfig = $this->hotBlock->getTranslationMessages()[$defaultLangId];
+            $langConfig = $tm[$defaultLangId];
         }
 
         $rawMessage = $langConfig->getNested($key);
