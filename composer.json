@@ -1,7 +1,7 @@
 {
     "name": "survanetwork/hotblock",
     "description": "A funny PvP Minigame",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "type": "project",
     "keywords": [
         "block",
