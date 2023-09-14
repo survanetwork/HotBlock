@@ -23,23 +23,23 @@
     <a href="https://discord.gg/t4Kg4j3829">
         <img src="https://img.shields.io/discord/685532530451283997?color=blueviolet" alt="Discord">
     </a>
-    <a href="https://twitter.com/survanetwork">
-        <img src="https://img.shields.io/twitter/follow/survanetwork?style=social" alt="Twitter">
+    <a href="https://plugins.surva.net">
+        <img src="https://img.shields.io/badge/website-visit-ee8031" alt="Website">
     </a>
 </p>
 
 ##
 
 <p align="center">
-    <img src=".github/.media/feature-banner.png" width="650" height="365" alt="HotBlock plugin features">
+    <a href="https://plugins.surva.net/#hotblock">
+        <img src="https://static.surva.net/osplugins/assets/dl-buttons/hotblock.png" width="220" height="auto" alt="Download HotBlock plugin release">
+        <img src="https://static.surva.net/osplugins/assets/feature-banners/hotblock.png" width="650" height="auto" alt="HotBlock plugin features">
+    </a>
 </p>
 
-[• Description](#-description)  
-[• Features](#-features)  
-[• Usage](#-usage)  
-[• Example Game Arena](#-example-game-arena)  
-[• Contribution](#-contribution)  
-[• License](#%EF%B8%8F-license)
+[Description](#-description) | [Features](#-features) | [Usage](#-usage)
+| [Example Game Arena](#-example-game-arena) | [Contribution](#-contribution)
+| [License](#%EF%B8%8F-license)
 
 ## 📙 Description
 HotBlock is a funny PvP mini-game.
