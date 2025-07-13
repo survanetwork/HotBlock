@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@4.1.1
+  aws-cli: circleci/aws-cli@5.4.1
+  aws-s3: circleci/aws-s3@4.1.2
 
 jobs:
   phpstan:
@@ -103,6 +104,7 @@ jobs:
       - run: cp /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_SHA1.phar /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
 
       # Upload files to AWS S3
+      - aws-cli/install
       - aws-s3/copy:
           from: /tmp/workspace/build-output/$CIRCLE_PROJECT_REPONAME$CIRCLE_TAG.phar
           to: "s3://static.surva.net/osplugins/dl/"
