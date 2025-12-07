@@ -23,7 +23,7 @@
     <a href="https://discord.gg/t4Kg4j3829">
         <img src="https://img.shields.io/discord/685532530451283997?color=blueviolet" alt="Discord">
     </a>
-    <a href="https://plugins.surva.net">
+    <a href="https://dev.surva.net/plugins/">
         <img src="https://img.shields.io/badge/website-visit-ee8031" alt="Website">
     </a>
 </p>
@@ -31,7 +31,7 @@
 ##
 
 <p align="center">
-    <a href="https://plugins.surva.net/#hotblock">
+    <a href="https://dev.surva.net/plugins/#hotblock">
         <img src="https://static.surva.net/osplugins/assets/dl-buttons/hotblock.png" width="220" height="auto" alt="Download HotBlock plugin release">
         <img src="https://static.surva.net/osplugins/assets/feature-banners/hotblock.png" width="650" height="auto" alt="HotBlock plugin features">
     </a>

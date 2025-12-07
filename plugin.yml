@@ -7,4 +7,4 @@ softdepend: ["EconomyAPI", "BedrockEconomy", "Capital", "InfoAPI"]
 
 author: survanetwork
 description: A funny PvP minigame
-website: https://plugins.surva.net/#hotblock
+website: https://dev.surva.net/plugins/#hotblock
