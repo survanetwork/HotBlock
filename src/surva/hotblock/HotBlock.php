@@ -38,8 +38,7 @@ class HotBlock extends PluginBase
      */
     public function onEnable(): void
     {
-        $this->saveResource(Path::join("languages", "en.yml"), true);
-        $this->defaultMessages = new Config(Path::join($this->getDataFolder(), "languages", "en.yml"));
+        $this->defaultMessages = new Config($this->getResourcePath(Path::join("languages", "en.yml")));
         $this->loadLanguageFiles();
 
         $this->findEconomyPlugin();
@@ -166,9 +165,8 @@ class HotBlock extends PluginBase
 
             $langId = $fileNameRes[0];
 
-            $this->saveResource(Path::join("languages", $langId . ".yml"), true);
             $this->translationMessages[$langId] = new Config(
-                Path::join($this->getDataFolder(), "languages", $langId . ".yml")
+                $this->getResourcePath(Path::join("languages", $langId . ".yml"))
             );
         }
     }
