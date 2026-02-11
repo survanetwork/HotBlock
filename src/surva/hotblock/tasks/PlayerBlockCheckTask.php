@@ -1,7 +1,8 @@
 <?php
 
 /**
- * HotBlock | player block checking task
+ * HotBlock | task to check if players are on blocks with
+ * special features and apply them
  */
 
 namespace surva\hotblock\tasks;
@@ -23,7 +24,9 @@ class PlayerBlockCheckTask extends Task
     }
 
     /**
-     * Check if players are on specific blocks and send messages/effects
+     * Check if players are on special blocks and send info tips and apply effects
+     *
+     * @return void
      */
     public function onRun(): void
     {

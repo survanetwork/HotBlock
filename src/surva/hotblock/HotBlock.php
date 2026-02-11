@@ -1,7 +1,8 @@
 <?php
 
 /**
- * HotBlock | plugin main class
+ * HotBlock | plugin main class, initialize economy provider and events/tasks,
+ * provide functions to check game area
  */
 
 namespace surva\hotblock;
@@ -22,24 +23,21 @@ use Symfony\Component\Filesystem\Path;
 class HotBlock extends PluginBase
 {
     /**
-     * @var \pocketmine\utils\Config default language config
+     * @var Config default language config
      */
     private Config $defaultMessages;
-
     /**
      * @var Config[] available language configs
      */
     private array $translationMessages;
-
     private ?EconomyProvider $economyProvider = null;
 
     /**
-     * Plugin has been enabled, initial setup
+     * Initialize plugin, load language files, find economy provider plugin, and register
+     * events and tasks
      */
     public function onEnable(): void
     {
-        $this->saveDefaultConfig();
-
         $this->saveResource(Path::join("languages", "en.yml"), true);
         $this->defaultMessages = new Config(Path::join($this->getDataFolder(), "languages", "en.yml"));
         $this->loadLanguageFiles();
@@ -47,7 +45,6 @@ class HotBlock extends PluginBase
         $this->findEconomyPlugin();
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-
         $this->getScheduler()->scheduleRepeatingTask(
             new PlayerBlockCheckTask($this),
             $this->getConfig()->get("checkspeed", 0.25) * 20
@@ -59,7 +56,10 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * Find a loaded economy plugin and set the provider
+     * Find an economy plugin on the server and set
+     * it as the economy provider
+     *
+     * @return void
      */
     private function findEconomyPlugin(): void
     {
@@ -75,7 +75,7 @@ class HotBlock extends PluginBase
     /**
      * Check if a player is inside the game area
      *
-     * @param  \pocketmine\player\Player  $pl
+     * @param Player $pl
      *
      * @return bool
      */
@@ -104,7 +104,7 @@ class HotBlock extends PluginBase
                 return false;
             }
         } elseif ($px > $ax || $px < $bx) {
-                return false;
+            return false;
         }
 
         if ($by > $ay) {
@@ -129,9 +129,9 @@ class HotBlock extends PluginBase
     /**
      * Shorthand to send a translated message to a command sender
      *
-     * @param  \pocketmine\command\CommandSender  $sender
-     * @param  string  $key
-     * @param  string[]  $replaces
+     * @param CommandSender $sender
+     * @param string $key
+     * @param array<string, string> $replaces
      *
      * @return void
      */
@@ -174,7 +174,7 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * @return \pocketmine\utils\Config[]
+     * @return Config[]
      */
     public function getTranslationMessages(): array
     {
@@ -182,7 +182,7 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * @return \pocketmine\utils\Config
+     * @return Config
      */
     public function getDefaultMessages(): Config
     {
@@ -190,7 +190,7 @@ class HotBlock extends PluginBase
     }
 
     /**
-     * @return \surva\hotblock\economy\EconomyProvider|null
+     * @return EconomyProvider|null
      */
     public function getEconomyProvider(): ?EconomyProvider
     {

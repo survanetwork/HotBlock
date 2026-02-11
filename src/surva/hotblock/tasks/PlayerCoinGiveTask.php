@@ -24,6 +24,8 @@ class PlayerCoinGiveTask extends Task
 
     /**
      * Give coins to players standing on the HotBlock
+     *
+     * @return void
      */
     public function onRun(): void
     {
@@ -67,8 +69,8 @@ class PlayerCoinGiveTask extends Task
     /**
      * Check if a player is standing on the HotBlock
      *
-     * @param  \pocketmine\world\World  $gameWld
-     * @param  \pocketmine\player\Player  $pl
+     * @param World $gameWld
+     * @param Player $pl
      *
      * @return bool
      */
@@ -80,10 +82,11 @@ class PlayerCoinGiveTask extends Task
     }
 
     /**
-     * Handle coin giving of a player
+     * Check minimum player count on the HotBlock and
+     * pay coins if the count is sufficient
      *
-     * @param  \pocketmine\world\World  $gameWld
-     * @param  \pocketmine\player\Player  $pl
+     * @param World $gameWld
+     * @param Player $pl
      */
     private function handlePlayer(World $gameWld, Player $pl): void
     {
@@ -106,9 +109,9 @@ class PlayerCoinGiveTask extends Task
     }
 
     /**
-     * Pay the coins to a player
+     * Add coins to a player
      *
-     * @param  Player  $pl
+     * @param Player $pl
      */
     private function payCoins(Player $pl): void
     {

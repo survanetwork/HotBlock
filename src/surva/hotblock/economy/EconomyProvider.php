@@ -1,7 +1,8 @@
 <?php
 
 /**
- * HotBlock | general economy provider
+ * HotBlock | general economy provider for implementations of economy plugin API's
+ * to extend
  */
 
 namespace surva\hotblock\economy;
@@ -13,15 +14,15 @@ interface EconomyProvider
     /**
      * Pay a specific amount of money to a player
      *
-     * @param  \pocketmine\player\Player  $pl
-     * @param  int  $moneyAmount
+     * @param Player $pl
+     * @param int $moneyAmount
      */
     public function pay(Player $pl, int $moneyAmount): bool;
 
     /**
      * Get the account balance of a player
      *
-     * @param  \pocketmine\player\Player  $pl
+     * @param Player $pl
      *
      * @return int|null
      */

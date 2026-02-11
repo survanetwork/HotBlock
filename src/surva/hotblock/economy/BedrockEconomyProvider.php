@@ -18,7 +18,6 @@ class BedrockEconomyProvider implements EconomyProvider
      * @var bool[] last pay results
      */
     private array $payResCache;
-
     /**
      * @var (int|null)[] last player balance results
      */

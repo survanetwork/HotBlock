@@ -1,7 +1,7 @@
 <?php
 
 /**
- * HotBlock | event listener
+ * HotBlock | event listener, listen for damage events to check
  */
 
 namespace surva\hotblock;
@@ -21,9 +21,11 @@ class EventListener implements Listener
     }
 
     /**
-     * Cancel damage if the player is on wood planks
+     * Cancel damage if the player is on wood planks (safe block)
      *
-     * @param  EntityDamageEvent  $event
+     * @param EntityDamageEvent $event
+     *
+     * @return void
      */
     public function onEntityDamage(EntityDamageEvent $event): void
     {
@@ -33,7 +35,7 @@ class EventListener implements Listener
             return;
         }
 
-        $world       = $entity->getWorld();
+        $world = $entity->getWorld();
         $hbWorldName = $this->hotBlock->getConfig()->get("world", "world");
 
         if ($world->getFolderName() === $hbWorldName && $this->hotBlock->isInGameArea($entity)) {
